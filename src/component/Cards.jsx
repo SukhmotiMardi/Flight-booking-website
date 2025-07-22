@@ -18,8 +18,8 @@ const CardItem = ({ imageSrc, altText, promoText }) => {
           <Image
             src={imageSrc}
             alt={altText}
-            width={250}
-            height={143}
+            width={280}
+            height={153}
             preview={false}
             style={{
               borderRadius: "10px",

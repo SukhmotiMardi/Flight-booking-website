@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
-
+ 
 const FlightSearchInterface = () => {
   const { RangePicker } = DatePicker;
   const [tripType, setTripType] = useState("oneWay");
@@ -41,9 +41,9 @@ const FlightSearchInterface = () => {
   const travelersRef = useRef(null);
   const classRef = useRef(null);
   const timeoutRef = useRef(null);
-
+ 
   const navigate = useNavigate();
-
+ 
   const getAirportApiCall = async (query, type) => {
     if (!query || query.length < 1) {
       if (type === "leavingFrom") {
@@ -91,7 +91,7 @@ const FlightSearchInterface = () => {
         if (type === "leavingFrom") {
           setSuggestions(results);
           setShowLeavingFromDropdown(true);
-          setIsLoading(false); 
+          setIsLoading(false);
         } else if (type === "goingTo") {
           setGoingToSuggestions(results);
           setGoingToDropdown(true);
@@ -130,7 +130,7 @@ const FlightSearchInterface = () => {
       );
     }
   };
-
+ 
   useEffect(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -138,16 +138,16 @@ const FlightSearchInterface = () => {
     timeoutRef.current = setTimeout(() => {
       getAirportApiCall(leavingFrom, "leavingFrom");
     }, 800);
-
+ 
     return () => clearTimeout(timeoutRef.current);
   }, [leavingFrom]);
-
+ 
   useEffect(() => {
     if (departureApiData) {
       console.log("Updated departureApiData:", departureApiData);
     }
   }, [departureApiData]);
-
+ 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -172,7 +172,7 @@ const FlightSearchInterface = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+ 
   const handleSuggestionSelect = (suggestion) => {
     setLeavingFrom(suggestion.iataCode);
     setDepartureApiData({
@@ -183,7 +183,7 @@ const FlightSearchInterface = () => {
     setShowLeavingFromDropdown(false);
     setSuggestions([]);
   };
-
+ 
   const tripTypes = [
     { key: "oneWay", label: "One Way" },
     { key: "roundTrip", label: "Round Trip" },
@@ -211,7 +211,7 @@ const FlightSearchInterface = () => {
       padding: "2",
     },
   ];
-
+ 
   const swapLocations = () => {
     setLeavingFrom(goingTo);
     setGoingTo(leavingFrom);
@@ -219,12 +219,12 @@ const FlightSearchInterface = () => {
     setSuggestions([]);
     setShowLeavingFromDropdown(false);
   };
-
+ 
   const getTotalTravelers = () => {
     const total = travelers.adults + travelers.children + travelers.infants;
     return total === 1 ? "1 Traveler" : `${total} Travelers`;
   };
-
+ 
   const updateTravelerCount = (type, increment) => {
     setTravelers((prev) => {
       const newCount = Math.max(0, prev[type] + (increment ? 1 : -1));
@@ -238,7 +238,7 @@ const FlightSearchInterface = () => {
       return { ...prev, [type]: newCount };
     });
   };
-
+ 
   const handleSearch = (e) => {
     e.preventDefault();
     const searchData = {
@@ -246,7 +246,7 @@ const FlightSearchInterface = () => {
       classType,
       leavingFrom: departureApiData?.iataCode || leavingFrom,
       goingTo,
-      departureDate, 
+      departureDate,
       returnDate:
         tripType === "roundTrip" || tripType === "multiCity"
           ? returnDate
@@ -254,7 +254,7 @@ const FlightSearchInterface = () => {
       travelers,
       fareType,
     };
-
+ 
     console.log("Search data:", searchData);
     navigate("/flight-list", {
       state: {
@@ -262,11 +262,11 @@ const FlightSearchInterface = () => {
         destinationLocationCode: goingTo,
         departureDate: departureDate,
         adults: travelers,
-        travelClass:classType
+        travelClass: classType,
       },
     });
   };
-
+ 
   useEffect(() => {
     if (goingToTimeoutRef.current) {
       clearTimeout(goingToTimeoutRef.current);
@@ -276,7 +276,7 @@ const FlightSearchInterface = () => {
     }, 800);
     return () => clearTimeout(goingToTimeoutRef.current);
   }, [goingTo]);
-
+ 
   const handleGoingToSuggestionSelect = (suggestion) => {
     setGoingTo(suggestion.iataCode);
     setGoingToApiData({
@@ -287,30 +287,30 @@ const FlightSearchInterface = () => {
     setGoingToDropdown(false);
     setGoingToSuggestions([]);
   };
-
+ 
   return (
-    <>
-      <div className="mx-auto mb-3 min-w-7xl max-w-[1440px] bg-[#FFFFFF] flex items-start justify-center pl-[98px] pr-[82px]">
-        <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E] top-[35px] bg-white shadow-sm relative">
+      <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+     
+   <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
+      <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E] top-[35px] bg-white shadow-sm relative">
           {/* Header */}
-          <div className="flex items-center gap-1 h-[58px] px-6">
+          <div className="flex items-center gap-2 h-[58px] px-6">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg">
               <img src="/noto-v1_airplane.png" alt="plane" />
             </span>
             <h1 className="text-[20px] font-semibold text-[#1a2341]">
               Search Flights
             </h1>
-            <span className="h-0 w-[59px]">
-              <img src="./Line 2.png" alt="separator" />
-            </span>
+            {/* <span className="h-0 flex-1">
+              <img src="./Line 2.png" alt="separator"  />
+            </span> */}
           </div>
-
+ 
           <hr className="border border-[#BABABA]" />
-          <br />
-          <form onSubmit={handleSearch}>
+          <form onSubmit={handleSearch} className="px-6 py-4">
             {/* Trip type and class */}
-            <div className="flex items-center gap-6 mb-2 pt-[3px] px-7">
-              <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4">
                 {tripTypes.map((type) => (
                   <label
                     key={type.key}
@@ -323,19 +323,8 @@ const FlightSearchInterface = () => {
                       checked={tripType === type.key}
                       onChange={() => setTripType(type.key)}
                     />
-                    <div
-                      className="p-4 rounded-2xl border-2 transition-all flex flex-col h-full"
-                      style={{
-                        padding: 0,
-                        border: "none",
-                        background: "none",
-                        boxShadow: "none",
-                      }}
-                    >
-                      <div
-                        className="flex items-center gap-1.5 mb-2"
-                        style={{ marginBottom: 0 }}
-                      >
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-1.5">
                         <span className="w-3.5 h-3.5 rounded-full border-[1.5px] border-black flex items-center justify-center">
                           {tripType === type.key && (
                             <span className="w-2.5 h-2.5 rounded-full border-[1.5px] border-black flex items-center justify-center">
@@ -365,9 +354,10 @@ const FlightSearchInterface = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {showClassDropdown && (
-                  <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                  <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
                     {classTypes.map((cls) => (
                       <button
+                      type="button"
                         key={cls}
                         onClick={() => {
                           setClassType(cls);
@@ -383,7 +373,7 @@ const FlightSearchInterface = () => {
               </div>
             </div>
             {/* Search form */}
-            <div className="flex items-center gap-[10px] mb-5 pt-2 px-6">
+            <div className="flex items-center gap-0 mb-5 relative">
               {/* Leaving from */}
               <div className="flex-1 relative" ref={leavingFromRef}>
                 <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[#1a234180]">
@@ -402,15 +392,16 @@ const FlightSearchInterface = () => {
                   onFocus={() =>
                     suggestions.length > 0 && setShowLeavingFromDropdown(true)
                   }
-                  className="pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] text-sm h-[50px] w-[228px] rounded-[9px] placeholder-[#191E3B] text-[#1a2341] bg-white focus:outline-none"
+                  className="pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] text-sm h-[50px] w-full max-w-[260px] rounded-l-[9px] rounded-r-[9px] placeholder-[#191E3B] text-[#1a2341] bg-white focus:outline-none"
                 />
                 {showLeavingFromDropdown && (
-                  <div className="absolute top-full left-0 mt-2 w-[228px] bg-white rounded-lg shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-2 w-full max-w-[260px] bg-white rounded-lg shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
                     {isLoading ? (
                       <div className="px-4 py-2 text-gray-500">Loading...</div>
                     ) : suggestions.length > 0 ? (
                       suggestions.map((suggestion, index) => (
                         <button
+                        type="button"
                           key={index}
                           onClick={() => handleSuggestionSelect(suggestion)}
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
@@ -428,16 +419,19 @@ const FlightSearchInterface = () => {
                 )}
               </div>
               {/* Swap */}
-              <button
-                className="p-2 rounded-full border-[1.5px] absolute z-10 left-[234px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors"
+                <div className=" relative">
+  <button
+                className="p-2 rounded-full border-[1.5px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors absolute left-[-3px] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
                 onClick={swapLocations}
                 type="button"
               >
                 <ArrowLeftRight className="w-5 h-5 text-[#063D5E]" />
               </button>
+                </div>
+           
               {/* Going to */}
               <div className="flex-1 relative" ref={goingToRef}>
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[#1a234180]">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1a234180]">
                   <img
                     src="./ph_map-pin-line.png"
                     className="w-6 h-6"
@@ -453,19 +447,18 @@ const FlightSearchInterface = () => {
                   onFocus={() =>
                     goingToSuggestions.length > 0 && setGoingToDropdown(true)
                   }
-                  className="pl-9 pr-4 h-[50px] w-[228px] rounded-[9px] text-sm py-4 border-[1.5px] border-[#063D5E] text-[#1a2341] placeholder-[#191E3B] bg-white focus:outline-none"
+                  className="pl-10 pr-4 h-[50px] w-full max-w-[260px] rounded-l-[9px] rounded-r-[9px] text-sm py-4 border-[1.5px] border-[#063D5E] text-[#1a2341] placeholder-[#191E3B] bg-white focus:outline-none"
                 />
                 {showGoingToDropdown && (
-                  <div className="absolute top-full left-0 mt-2 w-[228px] bg-white rounded-lg shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-2 w-full max-w-[260px] bg-white rounded-lg shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
                     {isGoingToLoading ? (
                       <div className="px-4 py-2 text-gray-500">Loading...</div>
                     ) : goingToSuggestions.length > 0 ? (
                       goingToSuggestions.map((suggestion, index) => (
                         <button
+                        type="button"
                           key={index}
-                          onClick={() =>
-                            handleGoingToSuggestionSelect(suggestion)
-                          }
+                          onClick={() => handleGoingToSuggestionSelect(suggestion)}
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
                         >
                           {suggestion.cityName} ({suggestion.iataCode}) -{" "}
@@ -481,7 +474,7 @@ const FlightSearchInterface = () => {
                 )}
               </div>
               {/* Dates */}
-              <div className="flex-1 relative">
+              <div className="flex-1 relative ml-4">
                 <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[#1a234180]">
                   <img
                     src="./stash_data-date-light.png"
@@ -489,7 +482,7 @@ const FlightSearchInterface = () => {
                     alt="calendar"
                   />
                 </span>
-                <div className="h-[50px] w-[228px] pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] rounded-[9px] text-left text-[#1a2341] bg-white focus:outline-none">
+                <div className="h-[50px] w-full max-w-[260px] pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] rounded-[9px] text-left text-[#1a2341] bg-white focus:outline-none">
                   <p className="absolute top-1 pt-1 text-gray-500 text-xs">
                     Dates
                   </p>
@@ -506,6 +499,7 @@ const FlightSearchInterface = () => {
                           outline: "none",
                           border: "none",
                           height: "20px",
+                          background:"transparent"
                         }}
                         onChange={(date) => {
                           if (date) {
@@ -525,6 +519,7 @@ const FlightSearchInterface = () => {
                           outline: "none",
                           border: "none",
                           height: "20px",
+ 
                         }}
                         onChange={(dates) => {
                           if (dates) {
@@ -538,7 +533,7 @@ const FlightSearchInterface = () => {
                 </div>
               </div>
               {/* Travelers */}
-              <div className="flex-1 relative" ref={travelersRef}>
+              <div className="flex-1 relative ml-4" ref={travelersRef}>
                 <span className="absolute left-2 top-1/2 -translate-y-1/2 text-[#1a234180]">
                   <img
                     src="./carbon_person.png"
@@ -547,10 +542,8 @@ const FlightSearchInterface = () => {
                   />
                 </span>
                 <button
-                  className="h-[50px] w-[228px] pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] rounded-[9px] text-left text-[#1a2341] bg-white focus:outline-none"
-                  onClick={() =>
-                    setShowTravelersDropdown(!showTravelersDropdown)
-                  }
+                  className="h-[50px] w-full max-w-[260px] pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] rounded-[9px] text-left text-[#1a2341] bg-white focus:outline-none"
+                  onClick={() => setShowTravelersDropdown(!showTravelersDropdown)}
                   type="button"
                 >
                   <p className="absolute top-1 pt-1 text-gray-500 text-xs">
@@ -565,17 +558,15 @@ const FlightSearchInterface = () => {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-gray-900">
-                            Adults
-                          </div>
+                          <div className="font-medium text-gray-900">Adults</div>
                           <div className="text-sm text-gray-500">18+ years</div>
                         </div>
                         <div className="flex items-center gap-3">
                           <button
+                          type="button"
                             onClick={() => updateTravelerCount("adults", false)}
                             disabled={travelers.adults <= 1}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                            type="button"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -583,9 +574,9 @@ const FlightSearchInterface = () => {
                             {travelers.adults}
                           </span>
                           <button
+                          type="button"
                             onClick={() => updateTravelerCount("adults", true)}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                            type="button"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -602,12 +593,10 @@ const FlightSearchInterface = () => {
                         </div>
                         <div className="flex items-center gap-3">
                           <button
-                            onClick={() =>
-                              updateTravelerCount("children", false)
-                            }
+                          type="button"
+                            onClick={() => updateTravelerCount("children", false)}
                             disabled={travelers.children <= 0}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                            type="button"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -615,11 +604,9 @@ const FlightSearchInterface = () => {
                             {travelers.children}
                           </span>
                           <button
-                            onClick={() =>
-                              updateTravelerCount("children", true)
-                            }
+                          type="button"
+                            onClick={() => updateTravelerCount("children", true)}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                            type="button"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -627,21 +614,17 @@ const FlightSearchInterface = () => {
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-gray-900">
-                            Infants
-                          </div>
+                          <div className="font-medium text-gray-900">Infants</div>
                           <div className="text-sm text-gray-500">
                             Under 2 years
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <button
-                            onClick={() =>
-                              updateTravelerCount("infants", false)
-                            }
+                          type="button"
+                            onClick={() => updateTravelerCount("infants", false)}
                             disabled={travelers.infants <= 0}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                            type="button"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -649,15 +632,16 @@ const FlightSearchInterface = () => {
                             {travelers.infants}
                           </span>
                           <button
+                          type="button"
                             onClick={() => updateTravelerCount("infants", true)}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
-                            type="button"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
                       <button
+                      type="button"
                         onClick={() => setShowTravelersDropdown(false)}
                         className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                       >
@@ -670,13 +654,13 @@ const FlightSearchInterface = () => {
               {/* Search button */}
               <button
                 type="submit"
-                className="h-[50px] w-[100px] bg-[#1a2341] text-white rounded-[6px] font-light hover:bg-[#232d4d] transition-colors"
+                className="h-[50px] w-[98px] bg-[#1a2341] text-white rounded-[6px] font-light hover:bg-[#232d4d] transition-colors ml-4"
               >
                 Search
               </button>
             </div>
             {/* Special fares */}
-            <div className="border-[#063D5E] flex gap-6 px-6">
+            <div className="flex gap-4 px-0">
               <div className="my-4">
                 <h3 className="text-[14px] font-bold text-[#1a2341] mb-1">
                   Select a special fare
@@ -685,18 +669,18 @@ const FlightSearchInterface = () => {
                   EXTRA SAVINGS
                 </p>
               </div>
-              <div className="flex h-[75px] gap-4">
+              <div className="flex h-[75px] gap-2">
                 {fareTypes.map((fare) => (
                   <label key={fare.key} className="mt-3.5 cursor-pointer">
                     <input
                       type="radio"
                       name="fareType"
-                      className="sr-only h-[43px] w-[450px]"
+                      className="sr-only"
                       checked={fareType === fare.key}
                       onChange={() => setFareType(fare.key)}
                     />
                     <div
-                      className={`rounded-[5px] border transition-all flex flex-col h-[43px] pr-6 pl-2 ${
+                      className={`rounded-[5px] border transition-all flex flex-col h-[43px] px-2 ${
                         fareType === fare.key
                           ? "border-[#063D5E]"
                           : "border-[#063D5E] hover:border-[#1a2341]"
@@ -725,8 +709,11 @@ const FlightSearchInterface = () => {
           </form>
         </div>
       </div>
-    </>
+    </section>
   );
 };
-
+ 
 export default FlightSearchInterface;
+ 
+
+
