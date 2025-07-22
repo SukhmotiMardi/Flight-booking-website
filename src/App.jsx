@@ -15,9 +15,9 @@ function App() {
   const getToken = async () => {
     try {
       const payload = {
-        grant_type: "",
-        client_id: "",
-        client_secret: "",
+        grant_type: "client_credentials",
+        client_id: import.meta.env.VITE_CLIENT_ID,
+        client_secret: import.meta.env.VITE_CLIENT_SECRET,
       };
       // console.log("payload", payload);
       const response = await axios.post(
