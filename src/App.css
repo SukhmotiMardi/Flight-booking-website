@@ -1,0 +1,86 @@
+.flight-card-shadow {
+  box-shadow: 0 2px 16px 0 rgba(26,35,65,0.06);
+}
+
+input[type="radio"]:checked + span {
+  /* border-color: #ffd600 !important; */
+  background: #ffd600 !important;
+}
+
+input::placeholder {
+  color: #1a234180;
+  opacity: 1;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.slick-dots li.slick-active button:before {
+  content: '';
+  width: 20px;
+  height: 5px;
+  margin-Top: 7px;
+  background-color: black;
+  border-radius: 4px;
+  display: inline-block;
+  opacity: 1;
+}
+
+/* antd table cell styling */
+
+
+.custom-date-picker .ant-picker-cell {
+  width: "100px" !important; 
+  height: "100px" !important; 
+  /* line-height: 46px;  */
+  text-align: center; 
+}
+
+.custom-date-picker .ant-picker-cell-inner {
+  width: 100%;
+  height: 100%;
+  line-height: 46px;
+  font-size: 16px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-date-picker .ant-picker-cell:hover:not(.ant-picker-cell-selected):not(.ant-picker-cell-range-start):not(.ant-picker-cell-range-end):not(.ant-picker-cell-disabled) .ant-picker-cell-inner {
+  background: #e6f7ff; 
+}
+
+.custom-date-picker .ant-picker-panel-container {
+  width: 420px; 
+}
+
+.custom-date-picker .ant-picker-date-panel {
+  width: 350px; 
+}
+
+:where(.css-dev-only-do-not-override-pjilya).ant-picker {
+  padding-left: 0;
+  border: none !important;
+  outline: none !important;
+}
+
+:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:focus,
+:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:focus-within,
+:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:hover {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+:where(.css-dev-only-do-not-override-pjilya).ant-modal .ant-modal-content{
+  padding: 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
