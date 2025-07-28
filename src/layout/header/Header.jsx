@@ -3,10 +3,10 @@ import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  // const navigate= useNavigate()
+  const navigate= useNavigate()
   return (
     <>
-      <div className="flex  justify-between items-center pl-[98px] pr-[82px] h-[83px] ">
+      <div className="flex  justify-between items-center pl-[98px] pr-[82px] h-[83px] fixed top-0 left-0 right-0 bg-white z-50 shadow-lg">
         <div>
           <img
             src="/lyfetrip_vector_icon 1.png"
@@ -46,7 +46,7 @@ const Header = () => {
             </Typography>
           </div>
           <div>
-            <Button onClick={()=>navigate("/flight-list")} style={{ height: "30px", width: "80px", border: "1px solid #191E3B", gap:"0"}}>
+            <Button onClick={()=>navigate("/Login")} style={{ height: "30px", width: "80px", border: "1px solid #191E3B", gap:"0"}}>
               <Typography style={{ fontWeight: "500", fontSize: "13px" }}>
                 Sign In
               </Typography>
