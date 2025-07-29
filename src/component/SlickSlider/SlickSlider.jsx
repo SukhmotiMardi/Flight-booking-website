@@ -36,7 +36,7 @@ const SlickSlider = () => {
   };
  
   return (
-    <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+    <section className="w-full mx-auto my-10">
       <div className=" mx-auto">
         <Title
           level={3}
