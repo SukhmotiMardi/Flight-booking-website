@@ -37,16 +37,16 @@ const FlightList = () => {
     getFlightListApi();
   }, []);
 
-  // if (!flightData || flightData.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center h-screen">
-  //       <div className="flex flex-col items-center">
-  //         <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-  //         <p className="mt-4 text-lg text-gray-600">Loading flight data...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (!flightData || flightData.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="mt-4 text-lg text-gray-600">Loading flight data...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 pl-[98px] pr-[82px]">

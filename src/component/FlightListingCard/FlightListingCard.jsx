@@ -1,8 +1,9 @@
 import { Card, Button, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import axios from "axios"; // Added for API call
 import FlightDetailModal from "./FlightDetailModal/FlightDetailModal";
-
+import Cookie from "js-cookie"
 const formatTime = (isoDate) => {
   const date = new Date(isoDate);
   return date.toLocaleTimeString("en-US", {
@@ -113,8 +114,11 @@ const carrierData = {
   QP: "Akasa Air",
   G8: "Go First",
 };
+
 const FlightListingCard = ({ flight }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [onTimePercentage, setOnTimePercentage] = useState(null); 
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -200,6 +204,7 @@ const FlightListingCard = ({ flight }) => {
 
   const fetchDelayPrediction = async () => {
     try {
+      const access_token = Cookie.get("access_token"); 
       const response = await axios.get(
         `https://test.api.amadeus.com/v1/travel/predictions/flight-delay?originLocationCode=${
           firstSegment.departure.iataCode
@@ -232,7 +237,7 @@ const FlightListingCard = ({ flight }) => {
         );
         const percentage = getRandomPercentage(
           highestProbabilityPrediction.result
-        );
+        ); // Ensure getRandomPercentage is defined
         setOnTimePercentage(percentage);
       }
     } catch (error) {
@@ -240,9 +245,15 @@ const FlightListingCard = ({ flight }) => {
       setOnTimePercentage(93);
     }
   };
-  useEffect(() => {
-    fetchDelayPrediction();
-  }, [firstSegment, lastSegment, itinerary.duration, access_token]);
+
+  // useEffect(() => {
+    
+  //   fetchDelayPrediction();
+  //    const intervalId = setInterval(() => {
+  //     fetchDelayPrediction();
+  //   }, 200000);
+  //   return () => clearInterval(intervalId);
+  // }, [ ]);
 
   return (
     <>
@@ -342,19 +353,6 @@ const FlightListingCard = ({ flight }) => {
                   {isNonStop ? (
                     "Non Stop"
                   ) : (
-                    // <Tooltip
-                    //   title={segments.slice(0, -1).map((segment, index) => (
-                    //     <div key={index} className="h-10 flex justify-center items-center">
-                    //       Plane Change <br />
-                    //      <b> City/IATA Code:</b> {" "}
-                    //       {airportData[segment.arrival.iataCode]?.city ||
-                    //         segment.arrival.iataCode}
-                    //     </div>
-                    //   ))}
-                    // >
-                    //   {segments.length - 1} Stop{segments.length > 2 ? "s" : ""}
-                    // </Tooltip>
-
                     <Tooltip
                       title={layovers.map((layover, index) => (
                         <div

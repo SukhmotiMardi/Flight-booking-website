@@ -1,6 +1,6 @@
 const InfoCard = () => {
   return (
-    <section className="w-full max-w-[1440px] mx-auto mt-16 mb-1 pl-[98px] pr-[82px]">
+    <section className="w-full max-w-[1440px] mx-auto mb-1 pl-[98px] pr-[82px]">
       <div className="bg-[#073C5E]  mx-auto rounded-xl text-white p-6 flex h-[140px]  flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3 p-4 flex-1 border-r border-dashed border-yellow-400">
           <img src="./clarity_plane-line.png" alt="icon" className="w-[50px] h-[50px]" />

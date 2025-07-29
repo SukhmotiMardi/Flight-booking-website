@@ -4,13 +4,14 @@ import FlightList from "./pages/FlightList/FlightList";
 import HomePage from "./pages/Homepage/HomePage";
 import Login from "./pages/Login/Login";
 import {
-  createBrowserRouter,
   Route,
-  RouterProvider,
   Routes,
 } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import TripDetails from "./pages/TripDetails/TripDetails";
+
 function App() {
   const getToken = async () => {
     try {
@@ -49,12 +50,19 @@ function App() {
     return () => clearInterval(intervalId);
   }, []);
   return (
-    <Routes>
+        <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/flight-list" element={<FlightList />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/edit-profile" element={<EditProfile />} />
+      <Route path="/trip-details" element={<TripDetails />} />
+
+
     </Routes>
+  
   );
 }
 
 export default App;
+
+

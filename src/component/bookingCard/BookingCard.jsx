@@ -86,7 +86,7 @@ const FlightSearchInterface = () => {
         const results = response.data.data.map((item) => ({
           cityName: item.address?.cityName || item.name,
           iataCode: item.iataCode || item.id,
-          type: item.subType,
+          airportName: item.name,
         }));
         if (type === "leavingFrom") {
           setSuggestions(results);
@@ -178,7 +178,7 @@ const FlightSearchInterface = () => {
     setDepartureApiData({
       cityName: suggestion.cityName,
       iataCode: suggestion.iataCode,
-      type: suggestion.type,
+      airportName: suggestion.name,
     });
     setShowLeavingFromDropdown(false);
     setSuggestions([]);
@@ -282,7 +282,7 @@ const FlightSearchInterface = () => {
     setGoingToApiData({
       cityName: suggestion.cityName,
       iataCode: suggestion.iataCode,
-      type: suggestion.type,
+      airportName: suggestion.name,
     });
     setGoingToDropdown(false);
     setGoingToSuggestions([]);
@@ -292,7 +292,7 @@ const FlightSearchInterface = () => {
       <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
      
    <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
-      <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E] top-[35px] bg-white shadow-sm relative">
+      <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E]  bg-white shadow-sm relative">
           {/* Header */}
           <div className="flex items-center gap-2 h-[58px] px-6">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg">
@@ -407,7 +407,7 @@ const FlightSearchInterface = () => {
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
                         >
                           {suggestion.cityName} ({suggestion.iataCode}) -{" "}
-                          {suggestion.type}
+                          {suggestion.airportName}
                         </button>
                       ))
                     ) : (
@@ -462,7 +462,7 @@ const FlightSearchInterface = () => {
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
                         >
                           {suggestion.cityName} ({suggestion.iataCode}) -{" "}
-                          {suggestion.type}
+                          {suggestion.airportName+" AIRPORT"}
                         </button>
                       ))
                     ) : (
