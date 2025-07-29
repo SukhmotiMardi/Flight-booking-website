@@ -94,9 +94,9 @@ const Cards = () => {
 
   return (
     <>
-      <section className="w-full max-w-[1440px] mx-auto  pl-[98px] pr-[82px]">
+      <section className="w-full  mx-auo">
         <div
-          className="bg-[#f5f5f5] pb-5 mx-auto mt-3"
+          // className="bg-[#f5f5f5] pb-5 mx-auto mt-3"
           style={{ paddingTop: "20px" }}
         >
           <Title

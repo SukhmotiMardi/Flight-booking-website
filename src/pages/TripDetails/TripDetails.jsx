@@ -11,10 +11,10 @@ const TripDetails = () => {
 
   return (
     <>
-    <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
-        <Breadcrumb
+     <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+ <Breadcrumb
         separator={customSeparator}
-        className="ml-[98px] my-8 font-semibold text-lg"
+        className=" my-8 font-semibold text-lg"
         items={[
           {
             title: <a href="">My Account</a>,
@@ -25,7 +25,7 @@ const TripDetails = () => {
           },
         ]}
       />
-      <div className="border-[1px] border-black rounded-lg ml-[98px] mr-[82px]">
+      <div className="border-[1px] border-black rounded-lg ">
         {/* Header */}
         <div className="flex-1 flex flex-col w-96">
           <div className="flex items-center justify-between">
@@ -51,8 +51,8 @@ const TripDetails = () => {
         </div>
         <BookTripInfo/>
       </div>
-    </section>
-    
+     </section>
+     
     </>
   );
 };
