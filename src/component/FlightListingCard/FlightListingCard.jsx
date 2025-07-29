@@ -1,7 +1,7 @@
 import { Card, Button, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import axios from "axios"; // Added for API call
+import axios from "axios"; 
 import FlightDetailModal from "./FlightDetailModal/FlightDetailModal";
 import Cookie from "js-cookie"
 const formatTime = (isoDate) => {
