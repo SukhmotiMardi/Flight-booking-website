@@ -11,7 +11,8 @@ const TripDetails = () => {
 
   return (
     <>
-      <Breadcrumb
+    <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+        <Breadcrumb
         separator={customSeparator}
         className="ml-[98px] my-8 font-semibold text-lg"
         items={[
@@ -50,6 +51,8 @@ const TripDetails = () => {
         </div>
         <BookTripInfo/>
       </div>
+    </section>
+    
     </>
   );
 };
