@@ -49,10 +49,14 @@ const FlightList = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 pl-[98px] pr-[82px]">
-      {flightData.map((flight) => (
-        <FlightListingCard key={flight.id} flight={flight} />
-      ))}
+   <div className="flex justify-center w-full mt-28">
+ <div className="max-w-[1340px] w-full mx-auto px-4 lg:px-8 xl:px-12">
+        <div className="flex flex-col gap-4">
+          {flightData.map((flight) => (
+            <FlightListingCard key={flight.id} flight={flight} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
