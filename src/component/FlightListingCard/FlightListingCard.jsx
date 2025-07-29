@@ -1,7 +1,7 @@
 import { Card, Button, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import axios from "axios"; // Added for API call
+import axios from "axios"; 
 import FlightDetailModal from "./FlightDetailModal/FlightDetailModal";
 import Cookie from "js-cookie"
 const formatTime = (isoDate) => {
@@ -256,14 +256,14 @@ const FlightListingCard = ({ flight }) => {
   // }, [ ]);
 
   return (
-    <>
+ 
       <Card
-        className="w-full max-w-[1000px] mx-auto rounded-2xl border border-[#E3E6ED] p-0 hover:shadow-2xl transition-shadow duration-300"
+        className="w-full rounded-2xl border border-[#E3E6ED] p-1 hover:shadow-2xl transition-shadow duration-300"
         bodyStyle={{ padding: 0 }}
         style={{ boxShadow: "0 2px 8px 0 rgba(44, 51, 73, 0.04)" }}
       >
-        <div className="flex">
-          <div className="flex flex-col items-end justify-center px-6 pt-4 pb-2 ">
+        <div className="flex w-full">
+          <div className="flex flex-col items-end justify-center px-6 pt-4 pb-2 w-[250px] flex-shrink-0">
             {/* Airline Logo and Name */}
             <div className="flex items-center gap-3 min-w-[180px]">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mr-2">
@@ -294,10 +294,10 @@ const FlightListingCard = ({ flight }) => {
               </span>
             </div>
           </div>
-          <div className="flex flex-col items-end justify-between px-6 pt-2 pb-4 gap-6">
+          <div className="flex flex-col items-stretch justify-between px-6 pt-2 pb-4 gap-6 flex-grow">
             {/* On Time Percentage */}
-            <div className="flex items-center gap-1 bg-[#FFFFFF] rounded px-2 py-1 text-xs font-medium text-[#000000] border border-[black]">
-              % On Time
+            <div className="flex items-center gap-1 bg-[#FFFFFF] rounded px-2 py-1 text-xs font-medium text-[#000000] border border-[black] self-end">
+              {onTimePercentage}% On Time
               <Tooltip
                 title="This flight is almost always on time!
              We still recommend that you check the latest flight status with the airline directly on the day of travel."
@@ -305,9 +305,9 @@ const FlightListingCard = ({ flight }) => {
                 <InfoCircleOutlined className="ml-1 text-[#ffffff] text-xs bg-[#063D5E] rounded-md" />
               </Tooltip>
             </div>
-            <div className="flex">
+            <div className="flex w-full min-w-0">
               {/* From */}
-              <div className="flex flex-col items-start w-1/3">
+              <div className="flex flex-col items-start flex-1 min-w-0 px-2">
                 <div className="text-sm  bg-[#EFEFEF] p-2 font-bold mb-1 rounded">
                   From{" "}
                   <span className="text-[#063D5E] font-semibold">
@@ -332,7 +332,7 @@ const FlightListingCard = ({ flight }) => {
                 </div>
               </div>
               {/* Duration and Plane */}
-              <div className="flex flex-col items-center flex-1 w-1/3">
+              <div className="flex flex-col items-center flex-1 min-w-0 px-2">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="w-32 h-px bg-[#E3E6ED] inline-block"></span>
                   <img
@@ -371,7 +371,7 @@ const FlightListingCard = ({ flight }) => {
                 </div>
               </div>
               {/* To */}
-              <div className="flex flex-col items-end w-1/3">
+              <div className="flex flex-col items-end flex-1 min-w-0 px-2">
                 <div className="text-sm  bg-[#EFEFEF] p-2 font-bold mb-1 rounded">
                   To{" "}
                   <span className="text-[#063D5E] font-semibold">
@@ -396,7 +396,7 @@ const FlightListingCard = ({ flight }) => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-3 ">
+            <div className="flex gap-3 self-end">
               <Button
                 onClick={() => showModal()}
                 className="border-none bg-[#EFEFEF] text-[#4C9839]  font-semibold text-[15px] px-5 py-1.5 rounded "
@@ -421,7 +421,7 @@ const FlightListingCard = ({ flight }) => {
           </div>
         </div>
       </Card>
-    </>
+    
   );
 };
 

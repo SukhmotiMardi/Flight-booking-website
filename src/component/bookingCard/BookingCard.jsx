@@ -289,7 +289,7 @@ const FlightSearchInterface = () => {
   };
  
   return (
-      <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+      <section className="w-full mx-auto my-10">
      
    <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
       <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E]  bg-white shadow-sm relative">
@@ -354,7 +354,7 @@ const FlightSearchInterface = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {showClassDropdown && (
-                  <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                  <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
                     {classTypes.map((cls) => (
                       <button
                       type="button"

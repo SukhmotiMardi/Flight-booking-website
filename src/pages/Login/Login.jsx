@@ -1,4 +1,3 @@
-import React from "react";
 import { Input, Button, Divider, Form, message } from "antd";
 import {
   LockOutlined,

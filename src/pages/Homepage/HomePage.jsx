@@ -10,13 +10,13 @@ import InternationalCards from "../../component/InternationalCard/InternationalC
 const HomePage = () => {
   return (
     <>
-      <div className="rounded-xl bg-white shadow-sm p-6 border border-gray-200 mb-6">
+ <div className="flex justify-center w-full mt-24 border-b border-gray-800">
+ <div className="max-w-[1340px] w-full mx-auto px-4 lg:px-8 xl:px-12">
         <FlightSearchInterface />
         <InfoCard />
-
         <Cards />
-        <section className="w-full max-w-[1440px] mx-auto  pl-[98px] pr-[82px]">
-          <div className=" mx-auto">
+        <section className="w-full mx-auto">
+          <div className="mx-auto">
             <Image
               src="../Images/island.png"
               preview={false}
@@ -27,6 +27,7 @@ const HomePage = () => {
                 borderRadius: "10px",
                 background: "#f5f5f5",
                 cursor: "pointer",
+                objectFit: "cover"
               }}
             />
           </div>
@@ -34,7 +35,9 @@ const HomePage = () => {
         <SlickSlider />
         <DomesticCards />
         <InternationalCards />
-        </div>
+</div>
+</div>
+
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { CaretRightOutlined } from "@ant-design/icons";
-import { Breadcrumb, Card } from "antd";
+import { Breadcrumb } from "antd";
 import BookTripInfo from "../../component/BookedTripInfo/BookTripInfo";
 
 const TripDetails = () => {
