@@ -3,6 +3,7 @@ import "./App.css";
 import FlightList from "./pages/FlightList/FlightList";
 import HomePage from "./pages/Homepage/HomePage";
 import Login from "./pages/Login/Login";
+import Dashboard from "./component/Dashboard/Dashboard";
 import {
   createBrowserRouter,
   Route,
@@ -53,6 +54,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/flight-list" element={<FlightList />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }

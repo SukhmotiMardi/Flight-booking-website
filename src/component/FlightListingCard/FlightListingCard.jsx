@@ -240,9 +240,9 @@ const FlightListingCard = ({ flight }) => {
       setOnTimePercentage(93);
     }
   };
-  useEffect(() => {
-    fetchDelayPrediction();
-  }, [firstSegment, lastSegment, itinerary.duration, access_token]);
+  // useEffect(() => {
+  //   fetchDelayPrediction();
+  // }, [firstSegment, lastSegment, itinerary.duration, access_token]);
 
   return (
     <>
@@ -286,7 +286,7 @@ const FlightListingCard = ({ flight }) => {
           <div className="flex flex-col items-end justify-between px-6 pt-2 pb-4 gap-6">
             {/* On Time Percentage */}
             <div className="flex items-center gap-1 bg-[#FFFFFF] rounded px-2 py-1 text-xs font-medium text-[#000000] border border-[black]">
-              {onTimePercentage}% On Time
+              % On Time
               <Tooltip
                 title="This flight is almost always on time!
              We still recommend that you check the latest flight status with the airline directly on the day of travel."
@@ -428,3 +428,65 @@ const FlightListingCard = ({ flight }) => {
 };
 
 export default FlightListingCard;
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { Select } from 'antd';
+// import FlightListingCard from './FlightListingCard';
+
+// const { Option } = Select;
+
+// const FlightList = ({ flights }) => {
+//   const [sortOption, setSortOption] = useState('priceLowToHigh');
+
+//   // Sorting function
+//   const sortFlights = (flights, option) => {
+//     return [...flights].sort((a, b) => {
+//       const priceA = parseFloat(a.price.grandTotal);
+//       const priceB = parseFloat(b.price.grandTotal);
+      
+//       if (option === 'priceLowToHigh') {
+//         return priceA - priceB;
+//       } else if (option === 'priceHighToLow') {
+//         return priceB - priceA;
+//       }
+//       return 0;
+//     });
+//   };
+
+//   const sortedFlights = sortFlights(flights, sortOption);
+
+//   const handleSortChange = (value) => {
+//     setSortOption(value);
+//   };
+
+//   return (
+//     <div className="w-full max-w-[1200px] mx-auto">
+//       <div className="mb-4 flex justify-end">
+//         <Select
+//           defaultValue="priceLowToHigh"
+//           style={{ width: 200 }}
+//           onChange={handleSortChange}
+//           className="rounded-md"
+//         >
+//           <Option value="priceLowToHigh">Price: Low to High</Option>
+//           <Option value="priceHighToLow">Price: High to Low</Option>
+//         </Select>
+//       </div>
+//       <div className="space-y-4">
+//         {sortedFlights.map((flight, index) => (
+//           <FlightListingCard key={index} flight={flight} />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FlightList;
