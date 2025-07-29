@@ -10,7 +10,7 @@ import InternationalCards from "../../component/InternationalCard/InternationalC
 const HomePage = () => {
   return (
     <>
-      <div className="rounded-xl bg-white shadow-sm p-6 border border-gray-200 mb-6">
+      <div className="rounded-xl bg-white shadow-sm  border border-gray-200 mb-6">
         <FlightSearchInterface />
         <InfoCard />
 
