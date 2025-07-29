@@ -354,7 +354,7 @@ const FlightSearchInterface = () => {
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 {showClassDropdown && (
-                  <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-10">
+                  <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
                     {classTypes.map((cls) => (
                       <button
                       type="button"

@@ -44,7 +44,7 @@ const EditProfile = () => {
           <div className="flex-1 flex flex-col w-96">
             <div className="flex items-center justify-between ">
               <div className="flex w-full flex-col justify-center-center  gap-2 text-xl font-semibold border-black">
-                <div className="flex  grid grid-cols-2   items-center border-b border-[black] pb-4 pl-[58px] pr-[58px]  ">
+                <div className="grid grid-cols-2   items-center border-b border-[black] pb-4 pl-[58px] pr-[58px]  ">
                   <div className=" pt-4 col-span-1 flex items-center">
                     <img
                       src="/noto-v1_airplane.png"
