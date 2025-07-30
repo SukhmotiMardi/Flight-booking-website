@@ -25,7 +25,7 @@ const TripDetails = () => {
           },
         ]}
       />
-      <div className="border-[1px] border-black rounded-lg ">
+      <div className="border-[1px] border-black rounded-lg p-3 ">
         {/* Header */}
         <div className="flex-1 flex flex-col w-96">
           <div className="flex items-center justify-between">
