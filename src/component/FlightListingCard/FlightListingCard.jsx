@@ -206,7 +206,7 @@ const FlightListingCard = ({ flight }) => {
     try {
       const access_token = Cookie.get("access_token"); 
       const response = await axios.get(
-        `https://test.api.amadeus.com/v1/travel/predictions/flight-delay?originLocationCode=${
+        `https://test.api.amadeus.com/v1/travel/predictions/on-time?originLocationCode=${
           firstSegment.departure.iataCode
         }&destinationLocationCode=${
           lastSegment.arrival.iataCode
@@ -246,14 +246,14 @@ const FlightListingCard = ({ flight }) => {
     }
   };
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   fetchDelayPrediction();
-  //    const intervalId = setInterval(() => {
-  //     fetchDelayPrediction();
-  //   }, 200000);
-  //   return () => clearInterval(intervalId);
-  // }, [ ]);
+    fetchDelayPrediction();
+     const intervalId = setInterval(() => {
+      fetchDelayPrediction();
+    }, 200000);
+    return () => clearInterval(intervalId);
+  }, [ ]);
 
   return (
  
