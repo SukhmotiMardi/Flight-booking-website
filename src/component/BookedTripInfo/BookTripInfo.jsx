@@ -82,7 +82,7 @@ const BookTripInfo = () => {
             status={{
               type: "cancelled",
               message: "Your booking was cancelled.",
-              cancellationDate: "June 17th",
+              cancellationDate: "12 July' 25",
             }}
             actions={[
               { text: "View Refund Details", variant: "outline" },
@@ -99,7 +99,7 @@ const BookTripInfo = () => {
               to: { city: "Mumbai", code: "BOM" },
             }}
             flightDetails={{
-              date: "Saturday, 12 July 25",
+              date: "12 July' 25",
               arrival:"10:00 AM",
               departure: "12:00 PM",
               type: "One Way Trip",
@@ -122,10 +122,7 @@ const BookTripInfo = () => {
               to: { city: "Abu Dhabi", code: "AUH" },
             }}
             flightDetails={{
-              date: "Saturday, 12 July 25",
-              type: "One Way Trip",
-              arrival:"10:00 AM",
-              departure: "12:00 PM",
+              
             }}
             bookingId="NN2AFEZV34088224854"
             status={{

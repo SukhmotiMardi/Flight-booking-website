@@ -97,18 +97,18 @@ const CustomBookingCard = ({
                     <span>|</span>
                     <p>Booking ID: <span className="font-medium">{bookingId}</span></p>
                   </div>
-                ) : status.type === "awaited" ? (
+                ) : status.type === "unsuccessful" ? (
                   <div className="flex items-center space-x-4 text-sm text-gray-600">
                     <p>Booking ID: <span className="font-medium">{bookingId}</span></p>
                   </div>
                 ) : (
                   <>
-                    {flightDetails.date && (
+                    {flightDetails.date &&  (
                       <div className="flex items-center justify-between mb-2">
                         
 <p>{flightDetails.date} {flightDetails.arrival}</p>
                         
-<p>{flightDetails.date} {flightDetails.arrival}</p>
+<p>{flightDetails.date} {flightDetails.departure}</p>
                       </div>
                     )}
                     <div className="flex items-center space-x-4 text-sm text-gray-600">
