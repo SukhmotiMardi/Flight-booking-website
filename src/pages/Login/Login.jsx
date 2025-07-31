@@ -44,8 +44,8 @@ const Login = () => {
   };
  
   return (
-    <section className="w-full max-w-[1440px] pl-[98px] pr-[82px] mx-auto my-28">
-      <div className="bg-white  border border-gray-300  flex max-w-6xl">
+    <section className="w-full max-w-[1440px] pl-[98px] pr-[82px] mx-auto my-36">
+      <div className="bg-white  border border-gray-300 w-full flex max-w-7xl">
         <div className="w-1/2 flex mt-20 justify-center ">
           <img
             src="./Jumbo jet flying in the sky.png"

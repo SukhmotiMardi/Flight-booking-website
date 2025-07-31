@@ -4,15 +4,15 @@ import {
   CloseCircleOutlined,
   ExclamationCircleOutlined,
 } from "@ant-design/icons";
-import { FaSuitcaseRolling } from "react-icons/fa";
 import Upcoming from "./Upcoming/Upcomoing";
 import CustomBookingCard from "./CustomBookingCard";
+import { Luggage } from "lucide-react";
 
 const tabs = [
   {
     key: "upcoming",
     label: "Upcoming",
-    icon: <FaSuitcaseRolling className="text-lg" />,
+    icon: <Luggage  className="text-lg" />,
   },
   {
     key: "cancelled",

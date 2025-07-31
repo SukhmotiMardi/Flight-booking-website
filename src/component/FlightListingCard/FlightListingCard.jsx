@@ -1,6 +1,6 @@
 import { Card, Button, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios"; 
 import FlightDetailModal from "./FlightDetailModal/FlightDetailModal";
 import Cookie from "js-cookie"
@@ -202,58 +202,58 @@ const FlightListingCard = ({ flight }) => {
 
   const layovers = calculateLayoverTime(segments);
 
-  const fetchDelayPrediction = async () => {
-    try {
-      const access_token = Cookie.get("access_token"); 
-      const response = await axios.get(
-        `https://test.api.amadeus.com/v1/travel/predictions/on-time?originLocationCode=${
-          firstSegment.departure.iataCode
-        }&destinationLocationCode=${
-          lastSegment.arrival.iataCode
-        }&departureDate=${
-          firstSegment.departure.at.split("T")[0]
-        }&departureTime=${firstSegment.departure.at
-          .split("T")[1]
-          .substring(0, 5)}:00&arrivalDate=${
-          lastSegment.arrival.at.split("T")[0]
-        }&arrivalTime=${lastSegment.arrival.at
-          .split("T")[1]
-          .substring(0, 5)}:00&aircraftCode=${
-          firstSegment.aircraft?.code || "321"
-        }&carrierCode=${firstSegment.carrierCode}&flightNumber=${
-          firstSegment.number
-        }&duration=${itinerary.duration}`,
-        {
-          headers: { Authorization: `Bearer ${access_token}` },
-        }
-      );
+  // const fetchDelayPrediction = async () => {
+  //   try {
+  //     const access_token = Cookie.get("access_token"); 
+  //     const response = await axios.get(
+  //       `https://test.api.amadeus.com/v1/travel/predictions/on-time?originLocationCode=${
+  //         firstSegment.departure.iataCode
+  //       }&destinationLocationCode=${
+  //         lastSegment.arrival.iataCode
+  //       }&departureDate=${
+  //         firstSegment.departure.at.split("T")[0]
+  //       }&departureTime=${firstSegment.departure.at
+  //         .split("T")[1]
+  //         .substring(0, 5)}:00&arrivalDate=${
+  //         lastSegment.arrival.at.split("T")[0]
+  //       }&arrivalTime=${lastSegment.arrival.at
+  //         .split("T")[1]
+  //         .substring(0, 5)}:00&aircraftCode=${
+  //         firstSegment.aircraft?.code || "321"
+  //       }&carrierCode=${firstSegment.carrierCode}&flightNumber=${
+  //         firstSegment.number
+  //       }&duration=${itinerary.duration}`,
+  //       {
+  //         headers: { Authorization: `Bearer ${access_token}` },
+  //       }
+  //     );
 
-      if (response.data.data && response.data.data.length > 0) {
-        const highestProbabilityPrediction = response.data.data.reduce(
-          (prev, current) =>
-            parseFloat(current.probability) > parseFloat(prev.probability)
-              ? current
-              : prev
-        );
-        const percentage = getRandomPercentage(
-          highestProbabilityPrediction.result
-        ); // Ensure getRandomPercentage is defined
-        setOnTimePercentage(percentage);
-      }
-    } catch (error) {
-      console.log("Error fetching delay prediction: ", error);
-      setOnTimePercentage(93);
-    }
-  };
+  //     if (response.data.data && response.data.data.length > 0) {
+  //       const highestProbabilityPrediction = response.data.data.reduce(
+  //         (prev, current) =>
+  //           parseFloat(current.probability) > parseFloat(prev.probability)
+  //             ? current
+  //             : prev
+  //       );
+  //       const percentage = getRandomPercentage(
+  //         highestProbabilityPrediction.result
+  //       ); // Ensure getRandomPercentage is defined
+  //       setOnTimePercentage(percentage);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error fetching delay prediction: ", error);
+  //     setOnTimePercentage(93);
+  //   }
+  // };
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    fetchDelayPrediction();
-     const intervalId = setInterval(() => {
-      fetchDelayPrediction();
-    }, 200000);
-    return () => clearInterval(intervalId);
-  }, [ ]);
+  //   fetchDelayPrediction();
+  //    const intervalId = setInterval(() => {
+  //     fetchDelayPrediction();
+  //   }, 200000);
+  //   return () => clearInterval(intervalId);
+  // }, [ ]);
 
   return (
  
