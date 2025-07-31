@@ -100,7 +100,7 @@ const BookTripInfo = () => {
             }}
             flightDetails={{
               date: "12 July' 25",
-              arrival:"10:00 AM",
+              arrival: "10:00 AM",
               departure: "12:00 PM",
               type: "One Way Trip",
             }}
@@ -121,17 +121,13 @@ const BookTripInfo = () => {
               from: { city: "Kolkata", code: "CCU" },
               to: { city: "Abu Dhabi", code: "AUH" },
             }}
-            flightDetails={{
-              
-            }}
+            flightDetails={{}}
             bookingId="NN2AFEZV34088224854"
             status={{
               type: "unsuccessful",
               message: "Payment Status Awaited",
             }}
             actions={[]}
-
-            
           />
         )}
       </div>

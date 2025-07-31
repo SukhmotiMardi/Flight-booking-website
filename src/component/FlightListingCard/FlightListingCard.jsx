@@ -183,7 +183,7 @@ const FlightListingCard = ({ flight }) => {
       const arrivalTime = new Date(segments[i].arrival.at);
       const nextDepartureTime = new Date(segments[i + 1].departure.at);
       const layoverMs = nextDepartureTime - arrivalTime;
-      console.log("layover in ms", layoverMs);
+      // console.log("layover in ms", layoverMs);
 
       const layoverMinutes = Math.floor(layoverMs / 1000 / 60);
       const hours = Math.floor(layoverMinutes / 60);
