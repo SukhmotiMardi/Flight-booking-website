@@ -29,7 +29,7 @@ const Upcoming = () => {
   return (
     <div className="w-full max-w-5xl mx-auto flex flex-col gap-6">
       {bookings.map((item, index) => (
-        <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 p-5 w-[1024px] mx-auto">
+        <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 p-3 w-[1024px] mx-auto h-[220px]">
           <div className="flex items-start justify-between w-full">
             <div className="flex flex-col items-end justify-center px-6 pt-4 pb-2 w-[250px] flex-shrink-0">
               <div className="flex items-center gap-3 w-[180px]">
