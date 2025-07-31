@@ -1,9 +1,5 @@
+ 
 import { Input, Button, Divider, Form, message, Checkbox } from "antd";
-import {
-  LockOutlined,
-  GoogleOutlined,
-  MobileOutlined,
-} from "@ant-design/icons";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -44,16 +40,15 @@ const Login = () => {
   };
  
   return (
-    <section className="w-full max-w-[1440px] pl-[98px] pr-[82px] mx-auto my-28">
-      <div className="bg-white  border border-gray-300  flex max-w-6xl">
-        <div className="w-1/2 flex mt-20 justify-center ">
+    <section className="w-full max-w-[1440px] pl-[98px] pr-[82px] mx-auto mt-36">
+      <div className="bg-white   border border-gray-300 pb-10 flex max-w-7xl">
+        <div className="w-1/2 flex mt-10 justify-center ">
           <img
             src="./Jumbo jet flying in the sky.png"
             alt="Airplane"
-            className="object-cover h-[560px] w-[500px] rounded-[32px] "
+            className="object-cover h-[520px] w-[480px] rounded-[32px] "
           />
         </div>
- 
         <div className="w-1/2 flex flex-col justify-center px-10 py-8">
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
@@ -89,14 +84,15 @@ const Login = () => {
                 ]}
               >
                 <Input
-                  prefix={<MobileOutlined />}
+                 
+                  prefix={<img className="w-6" src="./proicons_phone.png" alt="mobileicon"/>}
                   size="large"
                   placeholder="Email Id / Mobile Number"
                   className="w-full h-12 border-blue-950"
                 />
               </Form.Item>
  
-              <Form.Item name="otpToggle" valuePropName="checked">
+              {/* <Form.Item name="otpToggle" valuePropName="checked">
                 <Checkbox style={{ borderColor: "green" }}>
                   <div className=" text-[#606268]">
                     We have sent you an{" "}
@@ -105,7 +101,7 @@ const Login = () => {
                     </span>
                   </div>
                 </Checkbox>
-              </Form.Item>
+              </Form.Item> */}
  
               <Form.Item className="flex  justify-center mb-0">
                 <Button
@@ -146,54 +142,20 @@ const Login = () => {
             </Button>
           </div>
  
-          <div className="text-center text-sm mb-6">
-            Don't have an account?{" "}
-            <span className="text-blue-900 hover:underline cursor-pointer font-medium">
-              Register Now
-            </span>
-          </div>
+         
  
           <div className="text-center text-xs text-gray-400 mb-6">
-            By proceeding, you agree to Lyfetrip{" "}
-            <span className="text-blue-900 cursor-pointer hover:underline">
+           By proceeding, you agree to Lyfetrip {" "}
+            <span className="text-blue-900 cursor-pointer hover:underline font-bold">
               Privacy Policy
             </span>{" "}
             and{" "}
-            <span className="text-blue-900 cursor-pointer hover:underline">
+            <span className="text-blue-900 cursor-pointer hover:underline font-bold">
               T&Cs
             </span>
           </div>
  
-          {/* Additional Images */}
-          <div
-            className="flex justify-center items-center mt-4"
-            style={{ position: "relative" }}
-          >
-            <img
-              src="./Group 688.png"
-              alt="Lyfetrip Logo"
-              width={380}
-              height={190}
-              preview={false}
-              style={{
-                cursor: "pointer",
-                objectFit: "cover",
-              }}
-            />
-            <img
-              src="/lyfetrip_vector_icon 1.png"
-              alt="Lyfetrip Logo"
-              width={70}
-              height={40}
-              preview={false}
-              style={{
-                position: "absolute",
-                top: "10%",
-                left: "42%",
-                color: "white",
-              }}
-            />
-          </div>
+       
         </div>
       </div>
     </section>
@@ -201,5 +163,4 @@ const Login = () => {
 };
  
 export default Login;
- 
  
