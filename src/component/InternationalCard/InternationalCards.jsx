@@ -35,12 +35,12 @@ const InternationalCards = () => {
      <>
        <div
          style={{
-           backgroundColor: "#FFFFF3",
-           width: "100%",
+          //  backgroundColor: "#FFFFF3",
+          //  width: "100%",
            // padding: "30px 0px",
- boxShadow: "2px 2px 08px #d9d9d9",
+//  boxShadow: "2px 2px 08px #d9d9d9",
          }}
-         className="pl-[98px] pr-[82px] py-8"
+         className="py-8"
        >
          <section className="w-full max-w-7xl mx-auto">
            <div className="bg-[#FFFFF3]  mx-auto">

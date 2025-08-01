@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <>
       <div className="fixed top-0 left-0 right-0 bg-white z-50">
-        <div className="max-w-[1340px] mx-auto px-4 lg:px-8 xl:px-12">
+        <div className="max-w-[1280px] mx-auto px-4 lg:px-8 xl:px-12">
           <div className="flex items-center justify-between h-[83px] min-w-[320px]">
             <div onClick={() => navigate("/")} className="cursor-pointer flex-none">
               <img
