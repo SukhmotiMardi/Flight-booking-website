@@ -54,8 +54,8 @@ const Footer = () => {
           padding: "30px 0px",
         }}
       >
-        <section className="w-full max-w-[1280px] mx-auto">
-          <div className=" pl-[98px] pr-[82px] pt-4 mx-auto">
+        <section className="max-w-[1280px] mx-auto px-4 lg:px-8 xl:px-12">
+          <div className="  pt-4 mx-auto">
             <h3 className="font-bold text-[#063D5E] text-[14px] mb-3">
               Popular Domestic Flight Routes
             </h3>

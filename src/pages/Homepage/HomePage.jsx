@@ -1,4 +1,3 @@
-import React from "react";
 import InfoCard from "../../component/infoCard/InfoCard";
 import FlightSearchInterface from "../../component/bookingCard/BookingCard";
 import SlickSlider from "../../component/SlickSlider/SlickSlider";

@@ -40,7 +40,7 @@ const Login = () => {
   };
  
   return (
-    <section className="w-full max-w-[1440px] pl-[98px] pr-[82px] mx-auto mt-36">
+    <section className=" max-w-[1280px] w-full mx-auto px-4 lg:px-8 xl:px-12 mt-36">
       <div className="bg-white   border border-gray-300 pb-10 flex max-w-7xl">
         <div className="w-1/2 flex mt-10 justify-center ">
           <img
