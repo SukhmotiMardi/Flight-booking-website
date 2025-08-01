@@ -2290,7 +2290,8 @@ const FlightList = () => {
   const [sortConfig, setSortConfig] = useState({ field: "price", direction: "asc" });
   const location = useLocation();
   const access_token = Cookies.get("access_token");
-
+const{departureCityName,departureAirportName,arrivalCityName,arrivalAirportName} = location.state;
+console.log(arrivalAirportName, "arrivalAirportName");
   const getFlightListApi = async () => {
     const payload = {
       originLocationCode: location.state.originLocationCode,
@@ -2406,7 +2407,7 @@ const FlightList = () => {
         {/* Flight Card */}
         <div className="flex flex-col gap-4">
           {filteredData.map((flight) => (
-            <FlightListingCard key={flight.id} flight={flight} />
+            <FlightListingCard key={flight.id} flight={flight} departureCityName={departureCityName} departureAirportName={departureAirportName} arrivalCityName={arrivalCityName} arrivalAirportName={arrivalAirportName}/>
           ))}
         </div>
       </div>

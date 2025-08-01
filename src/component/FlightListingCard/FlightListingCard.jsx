@@ -115,7 +115,7 @@ const carrierData = {
   G8: "Go First",
 };
 
-const FlightListingCard = ({ flight }) => {
+const FlightListingCard = ({ flight,departureCityName,departureAirportName,arrivalCityName,arrivalAirportName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onTimePercentage, setOnTimePercentage] = useState(null); 
 
@@ -143,24 +143,36 @@ const FlightListingCard = ({ flight }) => {
   const airline =
     carrierData[firstSegment.carrierCode] || firstSegment.carrierCode;
   const departure = {
-    city:
-      airportData[firstSegment.departure.iataCode]?.city ||
-      firstSegment.departure.iataCode,
+    city:departureCityName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' '),
     code: firstSegment.departure.iataCode,
     time: formatTime(firstSegment.departure.at),
-    airport:
-      airportData[firstSegment.departure.iataCode]?.airport ||
-      firstSegment.departure.iataCode,
+    airport:departureAirportName?.toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ') + " "+ "Airport"
   };
   const arrival = {
     city:
-      airportData[lastSegment.arrival.iataCode]?.city ||
-      lastSegment.arrival.iataCode,
+     arrivalCityName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' ')||lastSegment.arrival.iataCode,
     code: lastSegment.arrival.iataCode,
     time: formatTime(lastSegment.arrival.at),
-    airport:
-      airportData[lastSegment.arrival.iataCode]?.airport ||
-      lastSegment.arrival.iataCode,
+    airport:arrivalAirportName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' ')  + " "+ "Airport" ||
+     [],
   };
   const duration = formatDuration(itinerary.duration);
   const price = parseInt(flight.price.grandTotal).toLocaleString();
@@ -176,7 +188,7 @@ const FlightListingCard = ({ flight }) => {
     duration,
     price,
   ];
-
+console.log("FlightListingCard flightData", arrival);
   const calculateLayoverTime = (segments) => {
     const layovers = [];
     for (let i = 0; i < segments.length - 1; i++) {

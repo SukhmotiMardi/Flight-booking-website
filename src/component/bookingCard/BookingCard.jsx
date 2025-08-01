@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import "../../App.css";
 import { useNavigate } from "react-router-dom";
- 
+
 const FlightSearchInterface = () => {
   const { RangePicker } = DatePicker;
   const [tripType, setTripType] = useState("oneWay");
@@ -41,9 +41,9 @@ const FlightSearchInterface = () => {
   const travelersRef = useRef(null);
   const classRef = useRef(null);
   const timeoutRef = useRef(null);
- 
+
   const navigate = useNavigate();
- 
+
   const getAirportApiCall = async (query, type) => {
     if (!query || query.length < 1) {
       if (type === "leavingFrom") {
@@ -130,7 +130,7 @@ const FlightSearchInterface = () => {
       );
     }
   };
- 
+
   useEffect(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -138,16 +138,16 @@ const FlightSearchInterface = () => {
     timeoutRef.current = setTimeout(() => {
       getAirportApiCall(leavingFrom, "leavingFrom");
     }, 800);
- 
+
     return () => clearTimeout(timeoutRef.current);
   }, [leavingFrom]);
- 
+
   useEffect(() => {
     if (departureApiData) {
       console.log("Updated departureApiData:", departureApiData);
     }
   }, [departureApiData]);
- 
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -172,18 +172,18 @@ const FlightSearchInterface = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
- 
+
   const handleSuggestionSelect = (suggestion) => {
     setLeavingFrom(suggestion.iataCode);
     setDepartureApiData({
       cityName: suggestion.cityName,
       iataCode: suggestion.iataCode,
-      airportName: suggestion.name,
+      airportName: suggestion.airportName,
     });
     setShowLeavingFromDropdown(false);
     setSuggestions([]);
   };
- 
+
   const tripTypes = [
     { key: "oneWay", label: "One Way" },
     { key: "roundTrip", label: "Round Trip" },
@@ -211,7 +211,7 @@ const FlightSearchInterface = () => {
       padding: "2",
     },
   ];
- 
+
   const swapLocations = () => {
     setLeavingFrom(goingTo);
     setGoingTo(leavingFrom);
@@ -219,12 +219,12 @@ const FlightSearchInterface = () => {
     setSuggestions([]);
     setShowLeavingFromDropdown(false);
   };
- 
+
   const getTotalTravelers = () => {
     const total = travelers.adults + travelers.children + travelers.infants;
     return total === 1 ? "1 Traveler" : `${total} Travelers`;
   };
- 
+
   const updateTravelerCount = (type, increment) => {
     setTravelers((prev) => {
       const newCount = Math.max(0, prev[type] + (increment ? 1 : -1));
@@ -238,14 +238,14 @@ const FlightSearchInterface = () => {
       return { ...prev, [type]: newCount };
     });
   };
- 
+
   const handleSearch = (e) => {
     e.preventDefault();
     const searchData = {
       tripType,
       classType,
       leavingFrom: departureApiData?.iataCode || leavingFrom,
-      goingTo,
+      goingTo: goingToApiData?.airportName,
       departureDate,
       returnDate:
         tripType === "roundTrip" || tripType === "multiCity"
@@ -254,7 +254,7 @@ const FlightSearchInterface = () => {
       travelers,
       fareType,
     };
- 
+
     console.log("Search data:", searchData);
     navigate("/flight-list", {
       state: {
@@ -263,10 +263,14 @@ const FlightSearchInterface = () => {
         departureDate: departureDate,
         adults: travelers,
         travelClass: classType,
+        departureCityName: departureApiData?.cityName || "",
+        departureAirportName: departureApiData?.airportName || "",
+        arrivalCityName: goingToApiData?.cityName || "",
+        arrivalAirportName: goingToApiData?.airportName || "",
       },
     });
   };
- 
+
   useEffect(() => {
     if (goingToTimeoutRef.current) {
       clearTimeout(goingToTimeoutRef.current);
@@ -276,23 +280,22 @@ const FlightSearchInterface = () => {
     }, 800);
     return () => clearTimeout(goingToTimeoutRef.current);
   }, [goingTo]);
- 
+
   const handleGoingToSuggestionSelect = (suggestion) => {
     setGoingTo(suggestion.iataCode);
     setGoingToApiData({
       cityName: suggestion.cityName,
       iataCode: suggestion.iataCode,
-      airportName: suggestion.name,
+      airportName: suggestion.airportName,
     });
     setGoingToDropdown(false);
     setGoingToSuggestions([]);
   };
- 
+
   return (
-      <section className="w-full mx-auto my-10">
-     
-   <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
-      <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E]  bg-white shadow-sm relative">
+    <section className="w-full mx-auto my-10">
+      <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
+        <div className="w-full h-[308px] rounded-[26px] border-[1.5px] border-[#063D5E]  bg-white shadow-sm relative">
           {/* Header */}
           <div className="flex items-center gap-2 h-[58px] px-6">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg">
@@ -305,7 +308,7 @@ const FlightSearchInterface = () => {
               <img src="./Line 2.png" alt="separator"  />
             </span> */}
           </div>
- 
+
           <hr className="border border-[#BABABA]" />
           <form onSubmit={handleSearch} className="px-6 py-4">
             {/* Trip type and class */}
@@ -346,7 +349,7 @@ const FlightSearchInterface = () => {
               </div>
               <div className="relative" ref={classRef}>
                 <button
-                type="button"
+                  type="button"
                   onClick={() => setShowClassDropdown(!showClassDropdown)}
                   className="ml-auto border border-[#E2E2E2] rounded-[4px] px-4 py-1.5 text-[#191E3B] bg-[#F5F5F5] font-medium w-24.5 focus:outline-none flex items-center gap-2"
                 >
@@ -357,7 +360,7 @@ const FlightSearchInterface = () => {
                   <div className="absolute top-full z-20 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200">
                     {classTypes.map((cls) => (
                       <button
-                      type="button"
+                        type="button"
                         key={cls}
                         onClick={() => {
                           setClassType(cls);
@@ -401,7 +404,7 @@ const FlightSearchInterface = () => {
                     ) : suggestions.length > 0 ? (
                       suggestions.map((suggestion, index) => (
                         <button
-                        type="button"
+                          type="button"
                           key={index}
                           onClick={() => handleSuggestionSelect(suggestion)}
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
@@ -419,16 +422,16 @@ const FlightSearchInterface = () => {
                 )}
               </div>
               {/* Swap */}
-                <div className=" relative">
-  <button
-                className="p-2 rounded-full border-[1.5px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors absolute left-[-3px] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-                onClick={swapLocations}
-                type="button"
-              >
-                <ArrowLeftRight className="w-5 h-5 text-[#063D5E]" />
-              </button>
-                </div>
-           
+              <div className=" relative">
+                <button
+                  className="p-2 rounded-full border-[1.5px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors absolute left-[-3px] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+                  onClick={swapLocations}
+                  type="button"
+                >
+                  <ArrowLeftRight className="w-5 h-5 text-[#063D5E]" />
+                </button>
+              </div>
+
               {/* Going to */}
               <div className="flex-1 relative" ref={goingToRef}>
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1a234180]">
@@ -456,13 +459,15 @@ const FlightSearchInterface = () => {
                     ) : goingToSuggestions.length > 0 ? (
                       goingToSuggestions.map((suggestion, index) => (
                         <button
-                        type="button"
+                          type="button"
                           key={index}
-                          onClick={() => handleGoingToSuggestionSelect(suggestion)}
+                          onClick={() =>
+                            handleGoingToSuggestionSelect(suggestion)
+                          }
                           className="w-full text-left px-4 py-2 hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg text-sm"
                         >
                           {suggestion.cityName} ({suggestion.iataCode}) -{" "}
-                          {suggestion.airportName+" AIRPORT"}
+                          {suggestion.airportName + " AIRPORT"}
                         </button>
                       ))
                     ) : (
@@ -499,7 +504,7 @@ const FlightSearchInterface = () => {
                           outline: "none",
                           border: "none",
                           height: "20px",
-                          background:"transparent"
+                          background: "transparent",
                         }}
                         onChange={(date) => {
                           if (date) {
@@ -519,7 +524,6 @@ const FlightSearchInterface = () => {
                           outline: "none",
                           border: "none",
                           height: "20px",
- 
                         }}
                         onChange={(dates) => {
                           if (dates) {
@@ -543,7 +547,9 @@ const FlightSearchInterface = () => {
                 </span>
                 <button
                   className="h-[50px] w-full max-w-[260px] pl-9 pr-4 py-4 border-[1.5px] border-[#063D5E] rounded-[9px] text-left text-[#1a2341] bg-white focus:outline-none"
-                  onClick={() => setShowTravelersDropdown(!showTravelersDropdown)}
+                  onClick={() =>
+                    setShowTravelersDropdown(!showTravelersDropdown)
+                  }
                   type="button"
                 >
                   <p className="absolute top-1 pt-1 text-gray-500 text-xs">
@@ -558,12 +564,14 @@ const FlightSearchInterface = () => {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-gray-900">Adults</div>
+                          <div className="font-medium text-gray-900">
+                            Adults
+                          </div>
                           <div className="text-sm text-gray-500">18+ years</div>
                         </div>
                         <div className="flex items-center gap-3">
                           <button
-                          type="button"
+                            type="button"
                             onClick={() => updateTravelerCount("adults", false)}
                             disabled={travelers.adults <= 1}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -574,7 +582,7 @@ const FlightSearchInterface = () => {
                             {travelers.adults}
                           </span>
                           <button
-                          type="button"
+                            type="button"
                             onClick={() => updateTravelerCount("adults", true)}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
                           >
@@ -593,8 +601,10 @@ const FlightSearchInterface = () => {
                         </div>
                         <div className="flex items-center gap-3">
                           <button
-                          type="button"
-                            onClick={() => updateTravelerCount("children", false)}
+                            type="button"
+                            onClick={() =>
+                              updateTravelerCount("children", false)
+                            }
                             disabled={travelers.children <= 0}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -604,8 +614,10 @@ const FlightSearchInterface = () => {
                             {travelers.children}
                           </span>
                           <button
-                          type="button"
-                            onClick={() => updateTravelerCount("children", true)}
+                            type="button"
+                            onClick={() =>
+                              updateTravelerCount("children", true)
+                            }
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
                           >
                             <Plus className="w-4 h-4" />
@@ -614,15 +626,19 @@ const FlightSearchInterface = () => {
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-medium text-gray-900">Infants</div>
+                          <div className="font-medium text-gray-900">
+                            Infants
+                          </div>
                           <div className="text-sm text-gray-500">
                             Under 2 years
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <button
-                          type="button"
-                            onClick={() => updateTravelerCount("infants", false)}
+                            type="button"
+                            onClick={() =>
+                              updateTravelerCount("infants", false)
+                            }
                             disabled={travelers.infants <= 0}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -632,7 +648,7 @@ const FlightSearchInterface = () => {
                             {travelers.infants}
                           </span>
                           <button
-                          type="button"
+                            type="button"
                             onClick={() => updateTravelerCount("infants", true)}
                             className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50"
                           >
@@ -641,7 +657,7 @@ const FlightSearchInterface = () => {
                         </div>
                       </div>
                       <button
-                      type="button"
+                        type="button"
                         onClick={() => setShowTravelersDropdown(false)}
                         className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                       >
@@ -712,8 +728,5 @@ const FlightSearchInterface = () => {
     </section>
   );
 };
- 
+
 export default FlightSearchInterface;
- 
-
-

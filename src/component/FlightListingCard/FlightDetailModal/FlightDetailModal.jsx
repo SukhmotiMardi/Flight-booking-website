@@ -19,7 +19,7 @@ const FlightDetailModal = ({
     price,
   ] = flightData;
   const fareDetails = travelerPricings?.fareDetailsBySegment?.[0] || {};
-
+console.log("FlightDetailModal flightData", departure.airport);
   const airportData = {
   CCU: {
     city: "Kolkata",
@@ -90,10 +90,10 @@ const FlightDetailModal = ({
               {departure.city}
             </div>
             <div className="text-xs text-[#1a2341] mb-1">
-              {airportData[departure.code]?.airport || departure.code}
+              {departure.airport || departure.code}
             </div>
             <div className="text-[#1a2341] text-base font-medium">
-              {departure.time}
+             { departure.code} ({departure.time})
             </div>
           </div>
           {/* Center: Icon and dashed line */}
@@ -118,10 +118,10 @@ const FlightDetailModal = ({
               {arrival.city}
             </div>
             <div className="text-xs text-[#1a2341] mb-1">
-              {airportData[arrival.code]?.airport || arrival.code}
+              {arrival.airport|| arrival.code}
             </div>
             <div className="text-[#1a2341] text-base font-medium">
-              {arrival.time}
+              { arrival.code}({arrival.time})
             </div>
             {lastSegment.arrival.terminal && (
               <div className="text-xs text-[#1a2341] font-bold mt-1">
