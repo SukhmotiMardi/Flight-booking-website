@@ -49,4 +49,4 @@ jobs:
           # private ssh key registered on the server
           PRIVATE_SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY_MAIN }}
           # command to be executed
-          COMMAND: cd /var/www/lyfetrip.com/ && npm i && npm run build && cp /var/www/lyfetrip.com/.htaccess /var/www/lyfetrip.com/dist/.htaccess
+          COMMAND: cd /var/www/lyfetrip.com/ && npm run build && cp /var/www/lyfetrip.com/.htaccess /var/www/lyfetrip.com/dist/.htaccess
