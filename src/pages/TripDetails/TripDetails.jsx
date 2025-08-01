@@ -11,7 +11,7 @@ const TripDetails = () => {
 
   return (
     <>
-      <div className="max-w-[1340px] w-full mx-auto px-4 lg:px-8 xl:px-12">
+      <div className="max-w-[1280px] w-full mx-auto px-4 lg:px-8 xl:px-12">
         <Breadcrumb
           separator={customSeparator}
           className=" my-8 font-semibold text-lg"
