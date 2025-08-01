@@ -1,4 +1,4 @@
-import { FaPlane } from "react-icons/fa";
+import { Plane } from "lucide-react";
 
 const bookings = [
   {
@@ -70,7 +70,7 @@ const Upcoming = () => {
                  <div className="flex flex-col items-center flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-16 h-px bg-gray-300 inline-block"></span>
-                <FaPlane className="text-xl text-[#063D5E]" />
+                <Plane className="text-xl text-[#063D5E]" strokeWidth={0.75} />
                 <span className="w-16 h-px bg-gray-300 inline-block"></span>
               </div>
               <div className="text-xs text-[#1a2341] font-medium">
