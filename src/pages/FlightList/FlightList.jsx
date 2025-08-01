@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import FlightListingCard from "../../component/FlightListingCard/FlightListingCard";
-
+ 
+ 
+import { Divider } from "antd";
+import FlightListFliter from "../../component/FlightListFliter/FlightListFliter";
+import StaticBankOffers from "../../component/StaticBankOffers/StaticBankOffers";
+ 
+ 
+ 
 const parseDuration = (duration) => {
   const regex = /PT(?:(\d+)H)?(?:(\d+)M)?/;
   const match = duration.match(regex);
@@ -13,15 +20,15 @@ const parseDuration = (duration) => {
   const minutes = match[2] ? parseInt(match[2]) : 0;
   return hours * 60 + minutes;
 };
-
-
+ 
+ 
 const FlightList = () => {
   const [flightData, setFlightData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [sortConfig, setSortConfig] = useState({ field: "price", direction: "asc" });
   const location = useLocation();
   const access_token = Cookies.get("access_token");
-
+ 
   const getFlightListApi = async () => {
     const payload = {
       originLocationCode: location.state.originLocationCode,
@@ -43,22 +50,23 @@ const FlightList = () => {
           headers: { Authorization: `Bearer ${access_token}` },
         }
       );
-
+ 
       if (response) {
         setFlightData(response.data.data);
         setFilteredData(response.data.data);
       }
     } catch (error) {
       console.log("Error while fetching data: ", error);
+     
     }
   };
-
+ 
   const sortedData = (field) => {
     const newDirection =
       sortConfig.field === field && sortConfig.direction === "asc" ? "desc" : "asc";
-
+ 
     setSortConfig({ field, direction: newDirection });
-
+ 
     const sorted = [...flightData].sort((a, b) => {
       if (field === "price") {
         const priceA = parseFloat(a.price.total);
@@ -75,15 +83,15 @@ const FlightList = () => {
       }
       return 0;
     });
-
+ 
     setFilteredData(sorted);
     console.log(sorted, "sorted data");
   };
-
+ 
   useEffect(() => {
     getFlightListApi();
   }, []);
-
+ 
   if (!flightData || flightData.length === 0) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -95,13 +103,44 @@ const FlightList = () => {
     );
   }
    return (
-    <div className="flex justify-center w-full mt-28">
-      <div className="max-w-[1280px] w-full mx-auto px-4 lg:px-8 xl:px-12">
+ 
+<>
+ 
+ 
+     <section className="w-full max-w-[1280px] mx-auto  mt-24  px-4 lg:px-8 xl:px-12">
+        <Divider
+          type="horizontal"
+          style={{
+            borderColor: "#9b9c98ff",
+            marginTop: "50px",
+            marginBottom: "0px",
+          }}
+          dashed
+        />
+        <div className="flex flex-row my-0 ">
+          <FlightListFliter />
+          <Divider
+            type="vertical"
+            style={{
+              borderColor: "#9b9c98ff",
+              height: "750px",
+              marginTop: "0px",
+            }}
+            dashed
+          />
+ 
+           <div className="ml-10  flex flex-col my-0 ">
+            <StaticBankOffers />
+           
+         
+ 
+    <div className="  flex justify-center">
+      <div className=" mx-auto  ">
         {/* Sort Section */}
-        <div className="flex justify-center items-center my-6 gap-6">
+        <div className="  mx-auto flex items-center my-3 gap-6">
           Sort By:
           <div>
-            <div className="bg-[#073C5E] mx-auto rounded-md w-[800px] text-white p-3 flex h-[55px] flex-row items-center justify-between gap-4">
+            <div className="bg-[#073C5E] mx-auto rounded-md w-[750px] text-white p-3 flex h-[55px] flex-row items-center justify-between gap-4">
               <div
                 onClick={() => sortedData("price")}
                 className={`flex items-center justify-between gap-3 p-3 flex-1 border-r border-dashed cursor-pointer border-yellow-400 ${sortConfig.field === "price" ? "bg-[#094b7a]" : ""}`}
@@ -140,7 +179,11 @@ const FlightList = () => {
         </div>
       </div>
     </div>
+     </div>
+    </div>
+      </section>
+    </>
   );
 };
-
+ 
 export default FlightList;
