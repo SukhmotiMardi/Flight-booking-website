@@ -61,23 +61,23 @@ body {
 }
 
 :where(.css-dev-only-do-not-override-pjilya).ant-picker {
-  padding-left: 0;
-  border: none !important;
-  outline: none !important;
+  /* padding-left: 0; */
+  /* border: none !important;
+  outline: none !important; */
 }
 
-:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined {
+/* :where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined {
   border: none !important;
   box-shadow: none !important;
-}
+} */
 
-:where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:focus,
+/* :where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:focus,
 :where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:focus-within,
 :where(.css-dev-only-do-not-override-pjilya).ant-picker-outlined:hover {
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-}
+} */
 
 :where(.css-dev-only-do-not-override-pjilya).ant-modal .ant-modal-content{
   padding: 0;
