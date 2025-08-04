@@ -505,7 +505,13 @@ const FlightSearchInterface = () => {
                           border: "none",
                           height: "20px",
                           background: "transparent",
+                          padding:"0px",
+                          boxShadow: "none" ,
+   
                         }}
+inputStyle={{ border: 'none' }} 
+                        
+      
                         onChange={(date) => {
                           if (date) {
                             setDepartureDate(date.format("YYYY-MM-DD"));
@@ -524,6 +530,9 @@ const FlightSearchInterface = () => {
                           outline: "none",
                           border: "none",
                           height: "20px",
+                          padding:"0px",
+                          outline: "none",
+                          boxShadow: "none" ,
                         }}
                         onChange={(dates) => {
                           if (dates) {
