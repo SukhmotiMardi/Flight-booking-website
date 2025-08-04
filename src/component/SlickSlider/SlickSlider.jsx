@@ -37,7 +37,7 @@ const SlickSlider = () => {
  
   return (
     <section className="w-full mx-auto my-10">
-      <div className=" mx-auto pb-14">
+      <div className=" mx-auto">
         <Title
           level={3}
           style={{ fontWeight: "bold", marginBottom: "60px", fontSize: "22px" }}
@@ -95,5 +95,3 @@ const SlickSlider = () => {
 };
  
 export default SlickSlider;
- 
- 
