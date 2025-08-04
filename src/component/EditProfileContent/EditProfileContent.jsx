@@ -1,111 +1,294 @@
-import { DatePicker } from "antd";
-import React, { useState } from "react";
- 
+import React from "react";
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  Row,
+  Col,
+  Divider,
+  Typography,
+  DatePicker,
+} from "antd";
+
+const { Title, Text } = Typography;
+
 const EditProfileContent = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    gender: "",
-    dateOfBirth: "",
-    nationality: "",
-    address: "",
-    mobileNumber: "",
-    email: "",
-    passportNo: "",
-    panCard: "",
-  });
- 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [form] = Form.useForm();
+
+  const onFinish = (values) => {
+    console.log("Form values:", values);
   };
- 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
- 
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-[1440px] mx-auto my-4 pl-[58px] pr-[58px] bg-white rounded-lg mb-10 ">
-      {/* General Information */}
-      <div className="mb-8">
-        <h2 className="text-lg font-semibold text-[#063D5E] mb-4">General Information</h2>
-        {/* First row: First Name and Last Name */}
-        <div className="grid grid-cols-2 gap-6 mb-4">
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">First Name</label>
-            <input type="text" required name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" className="border border-gray-300 font-normal text-sm placeholder:font-normal rounded px-2 py-1 placeholder:text-sm" />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Last Name</label>
-            <input type="text" required name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" className="border border-gray-300 font-normal text-sm  placeholder:font-normal rounded px-2 py-1 placeholder:text-sm" />
-          </div>
+    <div className="max-w-[1340px] w-full mx-auto px-4 lg:px-8 xl:px-12 bg-white rounded-lg mb-10">
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+      >
+        <div className="mb-8">
+          <Title level={4} style={{ color: "#063D5E", marginBottom: "16px" }}>
+            General Information
+          </Title>
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item
+                label="First Name"
+                name="firstName"
+                rules={[
+                  // { required: true, message: "Please input your first name!" },
+                ]}
+              >
+                <Input
+                  placeholder="Enter First Name"
+                  size="large"
+                  className="border-blue-950"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Last Name"
+                name="lastName"
+                rules={[
+                  // { required: true, message: "Please input your last name!" },
+                ]}
+              >
+                <Input
+                  placeholder="Enter Last Name"
+                  size="large"
+                  className="border-blue-950"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={24}>
+            <Col span={8}>
+              <Form.Item
+                label="Gender"
+                name="gender"
+                rules={[
+                  // { required: true, message: "Please select your gender!" },
+                ]}
+              >
+                <Select
+                  placeholder="Select Gender"
+                  size="large"
+                  style={{
+                    borderColor: "#063D5E" ,
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    borderStyle: "solid",
+                  }}
+                  className="ant-select-selector"
+                  options={[
+                    { value: "1", label: "Male" },
+                    { value: "2", label: "Female" },
+                    { value: "3", label: "Other" },
+                  ]}
+                />
+              
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Date of Birth"
+                name="dateOfBirth"
+                rules={[
+                  {
+                    // required: true,
+                    // message: "Please select your date of birth!",
+                  },
+                ]}
+              >
+                <DatePicker
+                  placeholder="DD-MM-YYYY"
+                  format="DD-MM-YYYY"
+                  size="large"
+                  className="border-blue-950 w-full"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Nationality"
+                name="nationality"
+                rules={[
+                  // { required: true, message: "Please input your nationality!" },
+                ]}
+              >
+               <Select
+                  placeholder="Select Nationality"
+                  size="large"
+                  style={{
+                    borderColor: "#063D5E" ,
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    borderStyle: "solid",
+                  }}
+                  className="ant-select-selector"
+                  options={[
+                    { value: "1", label: "Indian" },
+                    // { value: "2", label: "Female" },
+                    // { value: "3", label: "Other" },
+                  ]}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Form.Item
+            label="Address"
+            name="address"
+            // rules={[{ required: true, message: "Please input your address!" }]}
+          >
+            <Input
+              placeholder="Enter Address"
+              size="large"
+              className="border-blue-950"
+            />
+          </Form.Item>
         </div>
-        {/* Second row: Gender, Date of Birth, Nationality */}
-        <div className="grid grid-cols-3 gap-6 mb-4">
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Gender</label>
-            <select name="gender" required value={formData.gender} onChange={handleChange} className="border border-gray-300 font-normal text-sm  rounded px-2 py-1 placeholder:font-normal placeholder:text-sm max-w-xs">
-              {/* <option value="">Select</option> */}
-              <option value="Male" className="text-sm font-normal">Male</option>
-              <option value="Female" className="text-sm font-normal">Female</option>
-              <option value="Other" className="text-sm font-normal">Other</option>
-            </select>
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Date of Birth</label>
-            <input type="date"  required name="dateOfBirth" placeholder="DD-MM-YYYY" value={formData.dateOfBirth} onChange={handleChange} className="border border-gray-300 font-normal text-sm  rounded px-2 placeholder:font-normal py-1 placeholder:text-sm max-w-xs" />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Nationality</label>
-            <input type="text" required name="nationality" value={formData.nationality} onChange={handleChange} placeholder="Indian" className="border border-gray-300 font-normal text-sm  rounded px-2 py-1 placeholder:text-sm max-w-xs" />
-          </div>
+        <Divider />
+        <div className="mb-8">
+          <Title level={4} style={{ color: "#063D5E", marginBottom: "8px" }}>
+            Contact Details
+          </Title>
+          <Text
+            type="secondary"
+            style={{
+              fontSize: "12px",
+              color: "#063D5E",
+              display: "block",
+              marginBottom: "16px",
+            }}
+          >
+            Add contact information to receive booking details & other alerts
+          </Text>
+
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item
+                label="Mobile No."
+                name="mobileNumber"
+                rules={[
+                  // {
+                  //   required: true,
+                  //   message: "Please input your mobile number!",
+                  // },
+                  {
+                    pattern: /^\d{10}$/,
+                    message: "Please enter a valid 10-digit mobile number!",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Enter Mobile No."
+                  maxLength={10}
+                  className="border-blue-950"
+                  size="large"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Email ID"
+                name="email"
+                rules={[
+                  // { required: true, message: "Please input your email!" },
+                  { type: "email", message: "Please enter a valid email!" },
+                ]}
+              >
+                <Input
+                  placeholder="Enter email id"
+                  className="border-blue-950"
+                  size="large"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </div>
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm font-medium">Address</label>
-          <input type="text" required name="address" value={formData.address} onChange={handleChange} placeholder="Type address" className="border font-normal text-sm  border-gray-300 rounded placeholder:font-normal p-2 placeholder:text-sm" />
+
+        <Divider />
+        <div className="mb-8">
+          <Title level={4} style={{ color: "#063D5E", marginBottom: "8px" }}>
+            Documents Details
+          </Title>
+          <Text
+            style={{
+              fontSize: "12px",
+              color: "#063D5E",
+              display: "block",
+              marginBottom: "16px",
+            }}
+          >
+            NOTE:{" "}
+            <span style={{ color: "#063D5E" }}>
+              Your PAN No. will only be used for international bookings as per
+              RBI Guidelines
+            </span>
+          </Text>
+
+          <Row gutter={24}>
+            <Col span={12}>
+              <Form.Item label="Passport No." name="passportNo">
+                <Input
+                  placeholder="Enter Passport No."
+                  className="border-blue-950"
+                  size="large"
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="PAN"
+                name="panCard"
+                rules={[
+                  {
+                    pattern: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+                    message:
+                      "Please enter a valid PAN number (e.g., ABCDE1234F)",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Enter PAN"
+                  maxLength={10}
+                  className="border-blue-950"
+                  size="large"
+                />
+              </Form.Item>
+            </Col>
+          </Row>
         </div>
-      </div>
-      {/* Contact Details */}
-      <div className="border-t border-gray-200 pt-6 mb-8">
-        <div className="flex items-center mb-2">
-          <span className="text-[#063D5E] text-base font-semibold mr-2">Contact Details</span>
-        </div>
-        <p className="text-xs text-[#063D5E] mb-4">Add contact information to receive booking details & other alerts</p>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Mobile Number</label>
-            <input type="number" required maxLength={"10"} name="mobileNumber" value={formData.mobileNumber} onChange={handleChange} placeholder="Mobile Number" className="border border-gray-300 rounded px-2 py-1 placeholder:text-sm font-normal text-sm  placeholder:font-normal" />
+
+        <Form.Item style={{ textAlign: "right", marginBottom: 0}}>
+           <div className='flex gap-5 justify-end mt-4'>
+          <Button
+            className="border-[#063D5E] w-24 p-1"
+            onClick={() => form.resetFields()}
+          >
+            Cancel
+          </Button>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="bg-[#063D5E] border w-24 p-1"
+          >
+            Save
+          </Button>
           </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Email ID</label>
-            <input type="email" required name="email" value={formData.email} onChange={handleChange} placeholder="Add email id" className="border border-gray-300 rounded px-2 py-1 placeholder:font-normal  font-normal text-sm placeholder:text-sm" />
-          </div>
-        </div>
-      </div>
-      {/* Documents Details */}
-      <div className="border-t border-gray-200 pt-6 mb-8">
-        <div className="flex items-center mb-2">
-          <span className="text-[#063D5E] text-base font-semibold mr-2">Documents Details</span>
-        </div>
-        <p className="text-xs text-[#063D5E] mb-4">NOTE: <span className="text-[#063D5E]">Your PAN No. will only be used for international bookings as per RBI Guidelines</span></p>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Passport Details</label>
-            <input type="text" name="passportNo" value={formData.passportNo} onChange={handleChange} placeholder="Passport No" className="border font-normal text-sm  border-gray-300 rounded px-2 py-1 placeholder:text-sm placeholder:font-normal" />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 text-sm font-medium">Pan Card Number</label>
-            <input type="text" name="panCard" value={formData.panCard} onChange={handleChange} placeholder="Type Pan Number" className="border font-normal text-sm  border-gray-300 rounded px-2 py-1 placeholder:text-sm placeholder:font-normal" />
-          </div>
-        </div>
-      </div>
-      {/* Buttons */}
-      <div className="flex justify-end gap-4">
-        <button type="button" className="border  text-sm  border-[#063D5E] w-[140px] text-[#063D5E] rounded px-6 py-2 font-medium">Cancel</button>
-        <button type="submit" className="bg-[#063D5E] text-sm  text-white rounded  py-2 w-[140px] font-medium">Save</button>
-      </div>
-    </form>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
- 
+
 export default EditProfileContent;

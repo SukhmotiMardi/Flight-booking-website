@@ -1,10 +1,31 @@
+import { Breadcrumb } from "antd";
 import EditProfileContent from "../../component/EditProfileContent/EditProfileContent";
 import { ChevronLeft, KeyRound, LogOut, Pencil } from "lucide-react";
+import { CaretRightOutlined } from "@ant-design/icons"
 
 const EditProfile = () => {
+   const customSeparator = (
+    <span className="text-yellow-500 font-extrabold text-xl">
+      <CaretRightOutlined />
+    </span>
+  );
   return (
-    <section className="w-full max-w-[1440px] mx-auto my-10 pl-[98px] pr-[82px]">
+<div className="max-w-[1340px] w-full mx-auto px-4 lg:px-8 xl:px-12 mt-24">
+            <Breadcrumb
+          separator={customSeparator}
+          className="font-semibold text-lg"
+          items={[
+            {
+              title: <a href="">My Account</a>,
+            },
+
+            {
+              title: "My Profile",
+            },
+          ]}
+        />
       <div className="mx-auto mb-3 bg-[#FFFFFF] flex items-start justify-center ">
+        
         <div className="flex w-full flex-row rounded-[26px] border-[1.5px] border-[#063D5E] top-[35px] bg-white shadow-sm relative">
           {/* Sidebar */}
 
@@ -71,7 +92,7 @@ const EditProfile = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

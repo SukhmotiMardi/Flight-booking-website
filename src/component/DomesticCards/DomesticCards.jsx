@@ -32,15 +32,8 @@ const destinations = [
 const DomesticCards = () => {
   return (
     <>
-      <div
-        style={{
-          backgroundColor: "#FEF6F6",
-          // width: "100%",
-          // padding: "30px 0px",
-        }}
-        className="pl-[98px] pr-[82px] py-8"
-      >
-        <section className="w-full max-w-[1280px] mx-auto">
+      
+        <section className="w-full max-w-[1280px] mx-auto py-8">
           <div className="bg-[#FEF6F6]  mx-auto">
             <Title
               level={3}
@@ -152,7 +145,7 @@ const DomesticCards = () => {
             </Row>
           </div>
         </section>
-      </div>
+     
     </>
   );
 };

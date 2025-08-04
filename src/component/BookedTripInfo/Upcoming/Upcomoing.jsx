@@ -1,4 +1,4 @@
-import { FaPlane } from "react-icons/fa";
+import { Plane } from "lucide-react";
 
 const bookings = [
   {
@@ -27,9 +27,9 @@ const bookings = [
 
 const Upcoming = () => {
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col gap-6">
+    <div className="w-full max-w-6xl mx-auto flex flex-col gap-6">
       {bookings.map((item, index) => (
-        <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 p-3 w-[1024px] mx-auto h-[220px]">
+        <div key={index} className="bg-white rounded-lg shadow-md border border-gray-200 p-3 w-full mx-auto h-[220px]">
           <div className="flex items-start justify-between w-full">
             <div className="flex flex-col items-end justify-center px-6 pt-4 pb-2 w-[250px] flex-shrink-0">
               <div className="flex items-center gap-3 w-[180px]">
@@ -70,7 +70,7 @@ const Upcoming = () => {
                  <div className="flex flex-col items-center flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-16 h-px bg-gray-300 inline-block"></span>
-                <FaPlane className="text-xl text-[#063D5E]" />
+                <Plane className="text-xl text-[#063D5E]" strokeWidth={0.75} />
                 <span className="w-16 h-px bg-gray-300 inline-block"></span>
               </div>
               <div className="text-xs text-[#1a2341] font-medium">

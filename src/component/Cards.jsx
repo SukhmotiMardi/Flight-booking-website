@@ -11,7 +11,7 @@ const CardItem = ({ imageSrc, altText, promoText }) => {
       <Card
         elevation={0}
         style={{
-          backgroundColor: "transparent", 
+          backgroundColor: "#F6F6F6", 
         }} 
       >
         <div style={{ position: "relative", width: 200 }}>
@@ -94,10 +94,10 @@ const Cards = () => {
 
   return (
     <>
-      <section className="w-full  mx-auo">
+      <section className="w-full mt-4 mx-auo">
         <div
-          // className="bg-[#f5f5f5] pb-5 mx-auto mt-3"
-          style={{ paddingTop: "20px" }}
+          className="bg-[#F6F6F6] pt-[20px] pb-[30px]"
+          // style={{ paddingTop: "20px" }}
         >
           <Title
             level={3}

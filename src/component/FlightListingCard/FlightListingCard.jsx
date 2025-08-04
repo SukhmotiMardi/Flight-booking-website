@@ -1,6 +1,6 @@
 import { Card, Button, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios"; 
 import FlightDetailModal from "./FlightDetailModal/FlightDetailModal";
 import Cookie from "js-cookie"
@@ -115,7 +115,7 @@ const carrierData = {
   G8: "Go First",
 };
 
-const FlightListingCard = ({ flight }) => {
+const FlightListingCard = ({ flight,departureCityName,departureAirportName,arrivalCityName,arrivalAirportName }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onTimePercentage, setOnTimePercentage] = useState(null); 
 
@@ -143,24 +143,36 @@ const FlightListingCard = ({ flight }) => {
   const airline =
     carrierData[firstSegment.carrierCode] || firstSegment.carrierCode;
   const departure = {
-    city:
-      airportData[firstSegment.departure.iataCode]?.city ||
-      firstSegment.departure.iataCode,
+    city:departureCityName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' '),
     code: firstSegment.departure.iataCode,
     time: formatTime(firstSegment.departure.at),
-    airport:
-      airportData[firstSegment.departure.iataCode]?.airport ||
-      firstSegment.departure.iataCode,
+    airport:departureAirportName?.toLowerCase()
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ') + " "+ "Airport"
   };
   const arrival = {
     city:
-      airportData[lastSegment.arrival.iataCode]?.city ||
-      lastSegment.arrival.iataCode,
+     arrivalCityName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' ')||lastSegment.arrival.iataCode,
     code: lastSegment.arrival.iataCode,
     time: formatTime(lastSegment.arrival.at),
-    airport:
-      airportData[lastSegment.arrival.iataCode]?.airport ||
-      lastSegment.arrival.iataCode,
+    airport:arrivalAirportName?.toLowerCase() 
+    .split(" ") 
+    .map((word, index) => {
+      return word.charAt(0).toUpperCase() + word.slice(1); 
+    })
+    .join(' ')  + " "+ "Airport" ||
+     [],
   };
   const duration = formatDuration(itinerary.duration);
   const price = parseInt(flight.price.grandTotal).toLocaleString();
@@ -176,7 +188,7 @@ const FlightListingCard = ({ flight }) => {
     duration,
     price,
   ];
-
+console.log("FlightListingCard flightData", arrival);
   const calculateLayoverTime = (segments) => {
     const layovers = [];
     for (let i = 0; i < segments.length - 1; i++) {
@@ -202,58 +214,58 @@ const FlightListingCard = ({ flight }) => {
 
   const layovers = calculateLayoverTime(segments);
 
-  const fetchDelayPrediction = async () => {
-    try {
-      const access_token = Cookie.get("access_token"); 
-      const response = await axios.get(
-        `https://test.api.amadeus.com/v1/travel/predictions/on-time?originLocationCode=${
-          firstSegment.departure.iataCode
-        }&destinationLocationCode=${
-          lastSegment.arrival.iataCode
-        }&departureDate=${
-          firstSegment.departure.at.split("T")[0]
-        }&departureTime=${firstSegment.departure.at
-          .split("T")[1]
-          .substring(0, 5)}:00&arrivalDate=${
-          lastSegment.arrival.at.split("T")[0]
-        }&arrivalTime=${lastSegment.arrival.at
-          .split("T")[1]
-          .substring(0, 5)}:00&aircraftCode=${
-          firstSegment.aircraft?.code || "321"
-        }&carrierCode=${firstSegment.carrierCode}&flightNumber=${
-          firstSegment.number
-        }&duration=${itinerary.duration}`,
-        {
-          headers: { Authorization: `Bearer ${access_token}` },
-        }
-      );
+  // const fetchDelayPrediction = async () => {
+  //   try {
+  //     const access_token = Cookie.get("access_token"); 
+  //     const response = await axios.get(
+  //       `https://test.api.amadeus.com/v1/travel/predictions/on-time?originLocationCode=${
+  //         firstSegment.departure.iataCode
+  //       }&destinationLocationCode=${
+  //         lastSegment.arrival.iataCode
+  //       }&departureDate=${
+  //         firstSegment.departure.at.split("T")[0]
+  //       }&departureTime=${firstSegment.departure.at
+  //         .split("T")[1]
+  //         .substring(0, 5)}:00&arrivalDate=${
+  //         lastSegment.arrival.at.split("T")[0]
+  //       }&arrivalTime=${lastSegment.arrival.at
+  //         .split("T")[1]
+  //         .substring(0, 5)}:00&aircraftCode=${
+  //         firstSegment.aircraft?.code || "321"
+  //       }&carrierCode=${firstSegment.carrierCode}&flightNumber=${
+  //         firstSegment.number
+  //       }&duration=${itinerary.duration}`,
+  //       {
+  //         headers: { Authorization: `Bearer ${access_token}` },
+  //       }
+  //     );
 
-      if (response.data.data && response.data.data.length > 0) {
-        const highestProbabilityPrediction = response.data.data.reduce(
-          (prev, current) =>
-            parseFloat(current.probability) > parseFloat(prev.probability)
-              ? current
-              : prev
-        );
-        const percentage = getRandomPercentage(
-          highestProbabilityPrediction.result
-        ); // Ensure getRandomPercentage is defined
-        setOnTimePercentage(percentage);
-      }
-    } catch (error) {
-      console.log("Error fetching delay prediction: ", error);
-      setOnTimePercentage(93);
-    }
-  };
+  //     if (response.data.data && response.data.data.length > 0) {
+  //       const highestProbabilityPrediction = response.data.data.reduce(
+  //         (prev, current) =>
+  //           parseFloat(current.probability) > parseFloat(prev.probability)
+  //             ? current
+  //             : prev
+  //       );
+  //       const percentage = getRandomPercentage(
+  //         highestProbabilityPrediction.result
+  //       ); // Ensure getRandomPercentage is defined
+  //       setOnTimePercentage(percentage);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error fetching delay prediction: ", error);
+  //     setOnTimePercentage(93);
+  //   }
+  // };
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    fetchDelayPrediction();
-     const intervalId = setInterval(() => {
-      fetchDelayPrediction();
-    }, 200000);
-    return () => clearInterval(intervalId);
-  }, [ ]);
+  //   fetchDelayPrediction();
+  //    const intervalId = setInterval(() => {
+  //     fetchDelayPrediction();
+  //   }, 200000);
+  //   return () => clearInterval(intervalId);
+  // }, [ ]);
 
   return (
  
