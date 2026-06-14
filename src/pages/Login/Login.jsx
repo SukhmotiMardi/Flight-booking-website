@@ -1,6 +1,7 @@
 import { Input, Button, Divider, Form, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+   // import plane from './plane.gif'; // Adjust the path as needed
 
 const Login = () => {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ const Login = () => {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <img
-                src="./Untitled design (2) 1.png"
+                src="./plane.gif"
                 alt="Lyfetrip Logo"
                 className="w-[180px] h-[80px]"
               />

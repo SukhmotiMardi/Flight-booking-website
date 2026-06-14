@@ -424,7 +424,7 @@ const FlightSearchInterface = () => {
               {/* Swap */}
               <div className=" relative">
                 <button
-                  className="p-2 rounded-full border-[1.5px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors absolute left-[-3px] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+                  className="p-2 rounded-full border-[1.5px] border-[#063D5E] bg-white hover:bg-[#f5f7fa] transition-colors absolute right-[-46px] top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
                   onClick={swapLocations}
                   type="button"
                 >
@@ -433,7 +433,7 @@ const FlightSearchInterface = () => {
               </div>
 
               {/* Going to */}
-              <div className="flex-1 relative" ref={goingToRef}>
+              <div className="flex-1 relative ml-4" ref={goingToRef}>
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1a234180]">
                   <img
                     src="./ph_map-pin-line.png"
@@ -450,7 +450,7 @@ const FlightSearchInterface = () => {
                   onFocus={() =>
                     goingToSuggestions.length > 0 && setGoingToDropdown(true)
                   }
-                  className="pl-10 pr-4 h-[50px] w-full max-w-[260px] rounded-l-[9px] rounded-r-[9px] text-sm py-4 border-[1.5px] border-[#063D5E] text-[#1a2341] placeholder-[#191E3B] bg-white focus:outline-none"
+                  className="pl-10  pr-4 h-[50px] w-full max-w-[260px] rounded-l-[9px] rounded-r-[9px] text-sm py-4 border-[1.5px] border-[#063D5E] text-[#1a2341] placeholder-[#191E3B] bg-white focus:outline-none"
                 />
                 {showGoingToDropdown && (
                   <div className="absolute top-full left-0 mt-2 w-full max-w-[260px] bg-white rounded-lg shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
@@ -739,3 +739,4 @@ inputStyle={{ border: 'none' }}
 };
 
 export default FlightSearchInterface;
+
